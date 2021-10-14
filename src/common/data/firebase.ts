@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { isSsr } from "../view/util/isSsr";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,6 +19,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+function createAnalytics() {
+  return isSsr ? null : getAnalytics(app);
+}
+
 export const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
+export const analytics = createAnalytics();
 export const db = getFirestore();
