@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
-import * as yup from "yup";
-import Input from "../../../common/view/atoms/Input";
 import { Formik, FormikValues } from "formik";
+import React, { useState } from "react";
+import * as yup from "yup";
+import CogIcon from "../../../../public/assets/icons/cog.svg";
 import Button from "../../../common/view/atoms/Button";
-import { Option } from "../../../common/view/view-models/Option";
-import AnswersCreator from "../molecules/AnswersCreator";
 import Checkbox from "../../../common/view/atoms/Checkbox";
 import H3 from "../../../common/view/atoms/H3";
+import Input from "../../../common/view/atoms/Input";
+import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import { Option } from "../../../common/view/view-models/Option";
+import AnswersCreator from "../molecules/AnswersCreator";
 
 interface FormValues {
   title: string;
   description: string;
   answers: Option<number>[];
+  // Extra options
   isMultiple: boolean;
   email: string;
+  votesMax: string;
 }
 
 const initialValues: FormValues = {
   title: "",
-  description: null,
+  description: "",
   answers: [
     {
       label: "",
@@ -28,9 +31,37 @@ const initialValues: FormValues = {
   ],
   isMultiple: false,
   email: "",
+  votesMax: "",
 };
 
+const schema = yup.object().shape({
+  title: yup.string().required("Necessito un títol."),
+  description: yup.string().notRequired(),
+  answers: yup
+    .array()
+    .required()
+    .min(2, "Necessito com a mínim 2 opcions.")
+    .max(50, "Has superat el màxim de 50 opcions.")
+    .test(
+      "two-options-not-blank",
+      "Et falten opcions per completar… com a mínim 2.",
+      (answers) => {
+        const completedAnswers = answers.reduce((prev, a) => {
+          if (a.label?.length > 0) {
+            return prev + 1;
+          }
+          return prev;
+        }, 0);
+        return completedAnswers > 1;
+      }
+    ),
+  isMultiple: yup.bool().required(),
+  email: yup.string().notRequired(),
+  votesMax: yup.string().notRequired(),
+});
+
 export default function CreatePoll() {
+  const [showDescription, setShowDescription] = useState(false);
   const [showExtraOptions, setShowExtraOptions] = useState(false);
   function handleSubmit(values: FormikValues) {
     console.log(values);
@@ -41,6 +72,7 @@ export default function CreatePoll() {
         <Formik<FormValues>
           initialValues={initialValues}
           onSubmit={handleSubmit}
+          validationSchema={schema}
         >
           {function ({
             values,
@@ -63,13 +95,13 @@ export default function CreatePoll() {
                   error={errors.title && touched.title && errors.title}
                 />
 
-                {values.description === null ? (
+                {!showDescription ? (
                   <Button
                     className="mb-4"
                     fullWidth
                     color="boring"
                     variant="subtle"
-                    onClick={() => setFieldValue("description", "")}
+                    onClick={() => setShowDescription(true)}
                   >
                     Afegeix descripció
                   </Button>
@@ -110,6 +142,19 @@ export default function CreatePoll() {
                       onChange={handleChange}
                     />
                     <Input
+                      type="number"
+                      fullWidth
+                      label="Quanta gent respondrà a l'enquesta?"
+                      placeholder="Escriu un número"
+                      name="votesMax"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.votesMax}
+                      error={
+                        errors.votesMax && touched.votesMax && errors.votesMax
+                      }
+                    />
+                    <Input
                       fullWidth
                       label="T'enviem l'enllaç de l'enquesta per correu?"
                       placeholder="exemple@votaja.com"
@@ -125,13 +170,16 @@ export default function CreatePoll() {
                 <div className="pt-8 flex justify-between">
                   {!showExtraOptions ? (
                     <Button
+                      className="w-20 flex justify-center items-center"
                       variant="subtle"
                       color="boring"
                       onClick={() => setShowExtraOptions(true)}
                     >
-                      Opcions extra
+                      <CogIcon />
                     </Button>
-                  ): <div/>}
+                  ) : (
+                    <div />
+                  )}
                   <Button isSubmit>Crear enquesta</Button>
                 </div>
               </form>

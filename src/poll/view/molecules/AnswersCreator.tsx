@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "../../../common/view/atoms/Button";
 import Input from "../../../common/view/atoms/Input";
 import { Option } from "../../../common/view/view-models/Option";
@@ -20,11 +20,22 @@ export default function AnswersCreator({
   values,
   onChange,
 }: Props) {
+  const valuesAmountRef = useRef(1);
+  const ulRef = useRef<HTMLUListElement>(null);
   const maxValue = values.reduce<number>(
     (previousValue, currentValue) =>
       Math.max(previousValue, currentValue.value),
     0
   );
+
+  useEffect(() => {
+    if (values.length > valuesAmountRef.current) {
+      (
+        ulRef.current.querySelector("li:last-child input") as HTMLInputElement
+      )?.focus();
+    }
+    valuesAmountRef.current = values.length;
+  }, [values]);
 
   const disableDelete = values.length < 3;
 
@@ -44,7 +55,7 @@ export default function AnswersCreator({
     <label className="block pb-4">
       {label && <p className="text-sm pb-2 font-medium">{label}</p>}
 
-      <ul>
+      <ul ref={ulRef}>
         {values.map(({ label, value }) => (
           <li key={value} className="flex gap-3">
             <Input
@@ -74,7 +85,7 @@ export default function AnswersCreator({
         <AddIcon />
       </Button>
 
-      {error && <p className="text-xs pt-1 text-red">{label}</p>}
+      {error && <p className="text-xs pt-2 text-red-700">{error}</p>}
     </label>
   );
 }
