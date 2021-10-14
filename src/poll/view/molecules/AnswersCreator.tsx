@@ -42,7 +42,7 @@ export default function AnswersCreator({
 
   return (
     <label className="block pb-4">
-      {label && <p className="text-small pb-3 font-medium">{label}</p>}
+      {label && <p className="text-sm pb-2 font-medium">{label}</p>}
 
       <ul>
         {values.map(({ label, value }) => (
@@ -52,7 +52,7 @@ export default function AnswersCreator({
               onChange={(e) => changeText({ value, label: e.target.value })}
               value={label}
             />
-            <div className="pb-4 flex-none flex items-center">
+            <div className="pb-2 flex-none flex items-center">
               <button
                 type="button"
                 className={

@@ -4,9 +4,9 @@ import { CCnProps } from "../view-models/CProps";
 interface Props extends CCnProps {
   onClick?: React.MouseEventHandler;
   fullWidth?: boolean;
-  color?: "primary" | "success" | "warning" | "error";
+  color?: "primary" | "success" | "warning" | "error" | "boring";
   variant?: "primary" | "subtle";
-  isSubmit?: boolean
+  isSubmit?: boolean;
 }
 
 type ColorMap = Record<Props["color"], string>;
@@ -16,12 +16,17 @@ const colorMap: ColorMap = {
   success: "bg-success-600 hover:bg-success-700",
   warning: "bg-warning-600 hover:bg-warning-700",
   error: "bg-red-600 hover:bg-red-700",
+  boring: "bg-gray-600 hover:bg-gray-700",
 };
 const colorMapSubtle: ColorMap = {
-  primary: "bg-primary-100 font-medium text-primary ring-1 hover:ring-2 ring-primary-300",
-  success: "bg-success-100 font-medium text-success ring-1 hover:ring-2 ring-success-300",
-  warning: "bg-warning-100 font-medium text-warning ring-1 hover:ring-2 ring-warning-300",
+  primary:
+    "bg-primary-100 font-medium text-primary ring-1 hover:ring-2 ring-primary-300",
+  success:
+    "bg-success-100 font-medium text-success ring-1 hover:ring-2 ring-success-300",
+  warning:
+    "bg-warning-100 font-medium text-warning ring-1 hover:ring-2 ring-warning-300",
   error: "bg-red-100 font-medium text-red-700 ring-1 hover:ring-2 ring-red-300",
+  boring: "bg-gray-100 font-medium text-gray-700 ring-1 hover:ring-2 ring-gray-300",
 };
 
 const variantMap: Record<Props["variant"], ColorMap> = {
@@ -41,9 +46,13 @@ export default function Button({
   return (
     <button
       className={
-        "pb-2 py-1.5 px-3.5 rounded-lg text-white " + fwClass + variantMap[variant][color] + " " + className
+        "pb-2 py-1.5 px-3.5 rounded-lg text-white " +
+        fwClass +
+        variantMap[variant][color] +
+        " " +
+        className
       }
-      type={isSubmit ? 'submit' : 'button'}
+      type={isSubmit ? "submit" : "button"}
       {...props}
     />
   );
