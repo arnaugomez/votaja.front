@@ -10,6 +10,7 @@ export class Poll implements IPoll {
   name?: IPoll["name"];
   email?: IPoll["email"];
   votes: IPoll["votes"];
+  votesMax: IPoll["votesMax"];
 
   constructor(p: IPoll) {
     this.title = p.title;
@@ -19,6 +20,7 @@ export class Poll implements IPoll {
     this.name = p.name;
     this.email = p.email;
     this.votes = p.votes;
+    this.votesMax = p.votesMax;
   }
 
   toObject(): IPoll {
@@ -30,6 +32,7 @@ export class Poll implements IPoll {
       votes,
       email,
       name,
+      votesMax,
     } = this;
     return {
       answers,
@@ -39,6 +42,7 @@ export class Poll implements IPoll {
       votes,
       email,
       name,
+      votesMax,
     };
   }
 
@@ -49,18 +53,19 @@ export class Poll implements IPoll {
     }));
     for (const v of this.votes) {
       for (const id of v.answers) {
-        answersWithVotes.find((a) => a.id === id).votesAmount += 1
+        answersWithVotes.find((a) => a.id === id).votesAmount += 1;
       }
     }
     return answersWithVotes;
   }
 }
 
-interface IPoll extends TitleDescription {
+export interface IPoll extends TitleDescription {
   isMultipleChoice: boolean;
   answers: Answer[];
   /** Email of the creator */
   name?: string;
   email?: string;
   votes: Vote[];
+  votesMax?: number;
 }

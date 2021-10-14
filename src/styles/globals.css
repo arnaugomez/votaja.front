@@ -18,3 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.fix-svg svg {
+  height: 100%;
+}
