@@ -1,10 +1,10 @@
-export class ApiError {
+export class Err {
   message: string;
   constructor(message: string) {
     this.message = message;
   }
 
   get [Symbol.toStringTag]() {
-    return "Api Error: " + this.message;
+    return "Error: " + this.message;
   }
 }

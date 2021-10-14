@@ -8,6 +8,7 @@ import H3 from "../../../common/view/atoms/H3";
 import Input from "../../../common/view/atoms/Input";
 import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import { Option } from "../../../common/view/view-models/Option";
+import { pollRepository } from "../../data/repositories/PollRepository";
 import AnswersCreator from "../molecules/AnswersCreator";
 
 interface FormValues {
@@ -64,6 +65,7 @@ export default function CreatePoll() {
   const [showDescription, setShowDescription] = useState(false);
   const [showExtraOptions, setShowExtraOptions] = useState(false);
   function handleSubmit(values: FormikValues) {
+    pollRepository.createPoll(null)
     console.log(values);
   }
   return (
