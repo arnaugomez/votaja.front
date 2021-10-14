@@ -45,7 +45,7 @@ export class Poll implements IPoll {
   get answersWithVotes(): AnswerWithVotes[] {
     const answersWithVotes: AnswerWithVotes[] = this.answers.map((a) => ({
       ...a,
-      votes: 0,
+      votesAmount: 0,
     }));
     for (const v of this.votes) {
       for (const id of v.answers) {
