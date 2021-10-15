@@ -63,8 +63,8 @@ export class Poll implements IPoll {
 export interface IPoll extends TitleDescription {
   isMultipleChoice: boolean;
   answers: Answer[];
-  /** Email of the creator */
   name?: string;
+  /** Email of the creator */
   email?: string;
   votes: Vote[];
   votesMax?: number;
