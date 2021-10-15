@@ -1,27 +1,29 @@
-import { Formik, FormikValues } from "formik";
+import { deleteField } from "@firebase/firestore";
+import { Formik, FormikHelpers, FormikValues } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import CogIcon from "../../../../public/assets/icons/cog.svg";
+// TODO: Change spin icon
+import SpinIcon from "../../../../public/assets/icons/spin.svg";
 import Button from "../../../common/view/atoms/Button";
 import Checkbox from "../../../common/view/atoms/Checkbox";
 import H3 from "../../../common/view/atoms/H3";
 import Input from "../../../common/view/atoms/Input";
 import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import { Option } from "../../../common/view/view-models/Option";
-import { pollRepository } from "../../data/repositories/PollRepository";
 import AnswersCreator from "../molecules/AnswersCreator";
 
-interface FormValues {
+export interface CreatePollFormValues {
   title: string;
   description: string;
   answers: Option<number>[];
   // Extra options
-  isMultiple: boolean;
+  isMultipleChoice: boolean;
   email: string;
   votesMax: string;
 }
 
-const initialValues: FormValues = {
+const initialValues: CreatePollFormValues = {
   title: "",
   description: "",
   answers: [
@@ -30,7 +32,7 @@ const initialValues: FormValues = {
       value: 1,
     },
   ],
-  isMultiple: false,
+  isMultipleChoice: false,
   email: "",
   votesMax: "",
 };
@@ -61,17 +63,27 @@ const schema = yup.object().shape({
   votesMax: yup.string().notRequired(),
 });
 
-export default function CreatePoll() {
+interface Props {
+  onCreate: (values: CreatePollFormValues) => Promise<void>;
+}
+
+export default function CreatePoll({ onCreate }: Props) {
   const [showDescription, setShowDescription] = useState(false);
   const [showExtraOptions, setShowExtraOptions] = useState(false);
-  function handleSubmit(values: FormikValues) {
-    pollRepository.createPoll(null)
-    console.log(values);
+
+  function handleSubmit(
+    values: CreatePollFormValues,
+    helpers: FormikHelpers<CreatePollFormValues>
+  ) {
+    onCreate(values).then(() => {
+      helpers.setSubmitting(false);
+    });
   }
+
   return (
     <section className="pb-10">
       <MaxWidth>
-        <Formik<FormValues>
+        <Formik<CreatePollFormValues>
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={schema}
@@ -84,6 +96,7 @@ export default function CreatePoll() {
             touched,
             setFieldValue,
             handleSubmit,
+            isSubmitting,
           }) {
             return (
               <form onSubmit={handleSubmit}>
@@ -139,7 +152,7 @@ export default function CreatePoll() {
                     <H3 className="pb-3 text-center">Opcions extra</H3>
                     <Checkbox
                       label="Permet resposta múltiple"
-                      value={values.isMultiple}
+                      value={values.isMultipleChoice}
                       name="isMultiple"
                       onChange={handleChange}
                     />
@@ -182,7 +195,18 @@ export default function CreatePoll() {
                   ) : (
                     <div />
                   )}
-                  <Button isSubmit>Crear enquesta</Button>
+                  <Button
+                    className="w-36 flex justify-center items-center"
+                    isSubmit
+                  >
+                    {true ? (
+                      <div className="animate-spin">
+                        <SpinIcon />
+                      </div>
+                    ) : (
+                      "Crea enquesta"
+                    )}
+                  </Button>
                 </div>
               </form>
             );
