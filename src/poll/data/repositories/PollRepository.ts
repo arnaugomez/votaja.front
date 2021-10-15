@@ -36,10 +36,12 @@ class PollRepository implements IPollRepository {
   async createPoll(p: Poll): Promise<Err> {
     const slug = await this.slugify(p.title);
     const poll = toFPoll(p, slug);
+    console.log(poll)
 
     try {
       await addDoc(collection(db, "polls"), poll);
-    } catch {
+    } catch(e) {
+      console.log(e)
       return new Err("Could not save poll");
     }
 

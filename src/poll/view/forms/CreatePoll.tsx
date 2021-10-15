@@ -11,9 +11,10 @@ import H3 from "../../../common/view/atoms/H3";
 import Input from "../../../common/view/atoms/Input";
 import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import { Option } from "../../../common/view/view-models/Option";
+import { Poll } from "../../domain/models/Poll";
 import AnswersCreator from "../molecules/AnswersCreator";
 
-export interface CreatePollFormValues {
+export interface FormValues {
   title: string;
   description: string;
   answers: Option<number>[];
@@ -23,7 +24,7 @@ export interface CreatePollFormValues {
   votesMax: string;
 }
 
-const initialValues: CreatePollFormValues = {
+const initialValues: FormValues = {
   title: "",
   description: "",
   answers: [
@@ -58,24 +59,30 @@ const schema = yup.object().shape({
         return completedAnswers > 1;
       }
     ),
-  isMultiple: yup.bool().required(),
+  isMultipleChoice: yup.bool().required(),
   email: yup.string().notRequired(),
   votesMax: yup.string().notRequired(),
 });
 
 interface Props {
-  onCreate: (values: CreatePollFormValues) => Promise<void>;
+  onCreate: (poll: Poll) => Promise<void>;
 }
 
 export default function CreatePoll({ onCreate }: Props) {
-  const [showDescription, setShowDescription] = useState(false);
   const [showExtraOptions, setShowExtraOptions] = useState(false);
 
   function handleSubmit(
-    values: CreatePollFormValues,
-    helpers: FormikHelpers<CreatePollFormValues>
+    values: FormValues,
+    helpers: FormikHelpers<FormValues>
   ) {
-    onCreate(values).then(() => {
+    const votesMaxInt = parseInt(values.votesMax);
+    const poll = new Poll({
+      ...values,
+      votesMax: votesMaxInt ? votesMaxInt : null,
+      answers: values.answers.map((a) => ({ id: a.value, title: a.label })),
+      votes: [],
+    });
+    onCreate(poll).then(() => {
       helpers.setSubmitting(false);
     });
   }
@@ -83,7 +90,7 @@ export default function CreatePoll({ onCreate }: Props) {
   return (
     <section className="pb-10">
       <MaxWidth>
-        <Formik<CreatePollFormValues>
+        <Formik<FormValues>
           initialValues={initialValues}
           onSubmit={handleSubmit}
           validationSchema={schema}
@@ -102,7 +109,7 @@ export default function CreatePoll({ onCreate }: Props) {
               <form onSubmit={handleSubmit}>
                 <Input
                   fullWidth
-                  label="Títol de l'enquesta"
+                  label="Pregunta de l'enquesta"
                   name="title"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -110,36 +117,12 @@ export default function CreatePoll({ onCreate }: Props) {
                   error={errors.title && touched.title && errors.title}
                 />
 
-                {!showDescription ? (
-                  <Button
-                    className="mb-4"
-                    fullWidth
-                    color="boring"
-                    variant="subtle"
-                    onClick={() => setShowDescription(true)}
-                  >
-                    Afegeix descripció
-                  </Button>
-                ) : (
-                  <Input
-                    label="Descripció"
-                    name="description"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.description}
-                    error={
-                      errors.description &&
-                      touched.description &&
-                      errors.description
-                    }
-                  />
-                )}
                 <div className="p-4" />
 
                 <AnswersCreator
                   values={values.answers}
                   onChange={(a) => setFieldValue("answers", a)}
-                  label="Opcions"
+                  label="Respostes de l'enquesta"
                   error={
                     errors.answers &&
                     touched.answers &&
@@ -155,6 +138,19 @@ export default function CreatePoll({ onCreate }: Props) {
                       value={values.isMultipleChoice}
                       name="isMultiple"
                       onChange={handleChange}
+                    />
+                    <Input
+                      label="Afegeix una descripció"
+                      name="description"
+                      placeholder="Descripció de l'enquesta"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.description}
+                      error={
+                        errors.description &&
+                        touched.description &&
+                        errors.description
+                      }
                     />
                     <Input
                       type="number"
@@ -199,7 +195,7 @@ export default function CreatePoll({ onCreate }: Props) {
                     className="w-36 flex justify-center items-center"
                     isSubmit
                   >
-                    {true ? (
+                    {isSubmitting ? (
                       <div className="animate-spin">
                         <SpinIcon />
                       </div>
