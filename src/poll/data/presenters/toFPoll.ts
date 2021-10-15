@@ -1,7 +1,8 @@
+import { cleanse } from "../../../common/util/cleanse";
 import { Poll } from "../../domain/models/Poll";
 import { FPoll } from "../models/FPoll";
 
-export const toFPoll = (p: Poll, slug: string): FPoll => ({
+export const toFPoll = (p: Poll, slug: string): FPoll => cleanse({
   slug,
   title: p.title,
   description: p.description,
