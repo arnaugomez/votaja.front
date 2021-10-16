@@ -9,18 +9,13 @@ import Input from "../../../common/view/atoms/Input";
 import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
 import { answerToOption } from "../presenters/answerToOption";
 import RadioSelect from "../../../common/view/molecules/RadioSelect";
-import { v4 } from "uuid";
 import { Vote } from "../../domain/models/Vote";
+import Checkbox from "../../../common/view/atoms/Checkbox";
 
 interface FormValues {
   name: string;
   answers: Option<number>[];
 }
-
-const initialValues: FormValues = {
-  name: "",
-  answers: [],
-};
 
 interface Props {
   poll: Poll;
@@ -100,6 +95,12 @@ export default function VoteForm({
               onChange={handleChange}
               onBlur={handleBlur}
               error={errors.name && touched.name && errors.name}
+            />
+            <div className="h-1" />
+            <Checkbox
+              label="Anònim"
+              value={values.name === "Anònim"}
+              onChange={() => setFieldValue("name", 'Anònim')}
             />
             <div className="h-6" />
 
