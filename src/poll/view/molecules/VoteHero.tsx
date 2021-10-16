@@ -7,11 +7,12 @@ import { Poll } from "../../domain/models/Poll";
 
 interface Props {
   poll: Poll;
-  showDescription: boolean
+  showDescription: boolean;
 }
 
 export default function VoteHero({
-  poll: { title, description, votes, votesMax, name }, showDescription
+  poll: { title, description, votes, votesMax, name },
+  showDescription,
 }: Props) {
   const voters = `Han votat ${votes.length} ${
     votesMax ? `de ${votesMax} ` : ""
@@ -23,8 +24,10 @@ export default function VoteHero({
         Enquesta {name ? `creada per ${name}` : `creada amb Votaja`}
       </p>
       <h1 className="pt-6 pb-2 font-medium leading-none text-3xl">{title}</h1>
-      {votes.length > 1 && <Pretitle className="pb-4">{voters}</Pretitle>}
-      {showDescription && description && <p className="text-sm text-gray-500">{description}</p>}
+      <Pretitle className="pb-4">{voters}</Pretitle>
+      {showDescription && description && (
+        <p className="text-sm text-gray-500">{description}</p>
+      )}
     </div>
   );
 }
