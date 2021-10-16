@@ -18,9 +18,14 @@ export default function SharePollEmbed({ poll }: Props) {
   }, [urlCopied, setUrlCopied]);
 
   function copyUrl() {
-    // Todo: change embed string
-    const url = "https://votaja.com/p/" + poll.slug;
-    navigator.clipboard.writeText(url);
+    const embed = `
+    <iframe id="votaja-poll"
+       title="Enquesta votaja: ${poll.title}"
+       width="400"
+       height="600"
+       src="https://www.votaja.com/v/${poll.slug}">
+    </iframe>`
+    navigator.clipboard.writeText(embed);
     setUrlCopied(true);
   }
   return (

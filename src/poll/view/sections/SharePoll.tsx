@@ -15,7 +15,7 @@ export default function SharePoll({ poll }: Props) {
   useConfetti()
 
   return (
-    <section className="pb-10">
+    <section className="pb-16">
       <MaxWidth>
         <div className="py-6 px-4 bg-gray-50 rounded-2xl">
           <CelebrationImg />

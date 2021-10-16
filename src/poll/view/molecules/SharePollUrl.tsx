@@ -18,7 +18,7 @@ export default function SharePollUrl({ poll }: Props) {
   }, [urlCopied, setUrlCopied]);
 
   function copyUrl() {
-    const url = "https://votaja.com/p/" + poll.slug;
+    const url = "https://www.votaja.com/v/" + poll.slug;
     navigator.clipboard.writeText(url);
     setUrlCopied(true);
   }
@@ -29,7 +29,9 @@ export default function SharePollUrl({ poll }: Props) {
       </Description>
       <Button onClick={copyUrl} fullWidth>
         <div className="flex items-center gap-2">
-          <LinkIcon />
+          <div className="h-4 w-4">
+            <LinkIcon />
+          </div>
           {urlCopied ? <div>Copiat!</div> : <div>Copia l&apos;enllaç</div>}
         </div>
       </Button>
