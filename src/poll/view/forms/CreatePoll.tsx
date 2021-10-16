@@ -5,6 +5,7 @@ import * as yup from "yup";
 import CogIcon from "../../../../public/assets/icons/cog.svg";
 // TODO: Change spin icon
 import SpinIcon from "../../../../public/assets/icons/spin.svg";
+import BadgeTextSelector from "../../../common/view/atoms/BadgeTextSelector";
 import Button from "../../../common/view/atoms/Button";
 import Checkbox from "../../../common/view/atoms/Checkbox";
 import H3 from "../../../common/view/atoms/H3";
@@ -39,16 +40,16 @@ const initialValues: FormValues = {
 };
 
 const schema = yup.object().shape({
-  title: yup.string().required("Necessito un títol."),
+  title: yup.string().required("Escriu una pregunta."),
   description: yup.string().notRequired(),
   answers: yup
     .array()
     .required()
-    .min(2, "Necessito com a mínim 2 opcions.")
+    .min(2, "Escriu com a mínim 2 opcions.")
     .max(50, "Has superat el màxim de 50 opcions.")
     .test(
       "two-options-not-blank",
-      "Et falten opcions per completar… com a mínim 2.",
+      "Escriu com a mínim 2 opcions.",
       (answers) => {
         const completedAnswers = answers.reduce((prev, a) => {
           if (a.label?.length > 0) {
@@ -109,12 +110,22 @@ export default function CreatePoll({ onCreate }: Props) {
               <form onSubmit={handleSubmit}>
                 <Input
                   fullWidth
-                  label="Pregunta de l'enquesta"
+                  label="Pregunta de l'enquesta (escriu-la o tria una)"
                   name="title"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.title}
                   error={errors.title && touched.title && errors.title}
+                />
+                <BadgeTextSelector
+                  options={[
+                    "A on quedem?",
+                    "Quin restaurant preferiu?",
+                    "A quina hora ens veiem?",
+                    "Quina disco és millor?",
+                  ]}
+                  value={values.title}
+                  onChange={(v) => setFieldValue("title", v)}
                 />
 
                 <div className="p-4" />
