@@ -67,6 +67,15 @@ export class Poll implements IPoll {
     }
     return answersWithVotes;
   }
+
+  get mostVotedAnswer(): Answer {
+    if (!this.answers?.length) {
+      return null;
+    }
+    return this.answersWithVotes.sort(
+      (a, b) => b.votesAmount - a.votesAmount
+    )[0];
+  }
 }
 
 export interface IPoll extends TitleDescription {

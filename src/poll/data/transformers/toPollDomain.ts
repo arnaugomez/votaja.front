@@ -1,11 +1,11 @@
 import { Poll } from "../../domain/models/Poll";
 import { FPoll } from "./../models/FPoll";
-export const toPollDomain = (p: FPoll) =>
+export const toPollDomain = (p: FPoll, id: string) =>
   new Poll({
     answers: p.answers,
     description: p.description,
     email: p.email,
-    id: p.id,
+    id,
     isMultipleChoice: p.isMultipleChoice,
     name: p.name,
     slug: p.slug,

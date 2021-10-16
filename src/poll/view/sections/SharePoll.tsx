@@ -35,7 +35,6 @@ export default function SharePoll({ poll }: Props) {
       <MaxWidth>
         <div className="py-6 px-4 bg-gray-50 rounded-2xl">
           <CelebrationImg />
-          <div className="text-4xl"></div>
           <H2 className="text-center pb-4">Enquesta creada</H2>
           <Description className="text-center pb-4">
             Comparteix-la per Whatsapp i a les xarxes:
