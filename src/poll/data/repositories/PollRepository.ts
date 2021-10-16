@@ -3,8 +3,10 @@ import { toPollDomain } from "./../transformers/toPollDomain";
 import { toFPoll } from "./../presenters/toFPoll";
 import {
   addDoc,
+  doc,
   DocumentData,
   QueryDocumentSnapshot,
+  updateDoc,
 } from "@firebase/firestore";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../common/data/firebase";
@@ -42,7 +44,7 @@ class PollRepository implements IPollRepository {
     try {
       await addDoc(collection(db, "polls"), fpoll);
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return { poll: null, err: new Err("Could not save poll") };
     }
 
@@ -59,6 +61,17 @@ class PollRepository implements IPollRepository {
     }
     const data = p.data();
     return { poll: toPollDomain(data as FPoll) };
+  }
+
+  async updatePoll(p: Poll): Promise<Err> {
+    const fPoll = toFPoll(p);
+    try {
+      await updateDoc(doc(db, "polls", p.id), { ...fPoll });
+    } catch (e) {
+      console.error(e);
+      return new Err("Could not update poll");
+    }
+    return null
   }
 }
 

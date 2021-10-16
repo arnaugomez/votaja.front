@@ -9,6 +9,7 @@ import Input from "../../../common/view/atoms/Input";
 import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
 import { answerToOption } from "../presenters/answerToOption";
 import RadioSelect from "../../../common/view/molecules/RadioSelect";
+import {v4} from 'uuid'
 
 interface FormValues {
   name: string;
@@ -38,6 +39,7 @@ export default function VoteForm({ poll, onVote, onShowResults }: Props) {
   ) {
     const pollObj = poll.toObject();
     pollObj.votes.push({
+      id: v4(),
       answers: values.answers.map((a) => a.value),
       name: values.name,
     });
