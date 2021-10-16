@@ -1,5 +1,5 @@
 import { Formik, FormikHelpers } from "formik";
-import React from "react";
+import React, { useMemo } from "react";
 import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import * as yup from "yup";
@@ -10,6 +10,7 @@ import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
 import { answerToOption } from "../presenters/answerToOption";
 import RadioSelect from "../../../common/view/molecules/RadioSelect";
 import { v4 } from "uuid";
+import { Vote } from "../../domain/models/Vote";
 
 interface FormValues {
   name: string;
@@ -33,20 +34,44 @@ const schema = yup.object().shape({
   answers: yup.array().required().min(1, "Escull una opció."),
 });
 
-export default function VoteForm({ poll, onVote, onShowResults, voteId }: Props) {
+export default function VoteForm({
+  poll,
+  onVote,
+  onShowResults,
+  voteId,
+}: Props) {
+  const pollOptions = useMemo(() => poll.answers.map(answerToOption), [poll])
+  const currentVote = useMemo(
+    () => poll.votes.find((v) => v.id === voteId),
+    [poll, voteId]
+  );
+  const initialValues: FormValues = useMemo(
+    () => ({
+      name: currentVote ? currentVote.name : "",
+      answers: currentVote ? currentVote.answers.map((a) => pollOptions.find(o => o.value === a)): [],
+    }),
+    [currentVote]
+  );
+
   function handleSubmit(
     values: FormValues,
-    helpers: FormikHelpers<FormValues>
   ) {
     const pollObj = poll.toObject();
-    pollObj.votes.push({
+    const newVote: Vote = {
       id: voteId,
       answers: values.answers.map((a) => a.value),
       name: values.name,
-    });
+    };
+
+    if (currentVote) {
+      pollObj.votes = pollObj.votes.map((v) => (v.id === voteId ? newVote : v));
+    } else {
+      pollObj.votes.push(newVote);
+    }
+
     onVote(new Poll(pollObj));
   }
-  console.log(poll.isMultipleChoice);
+
   const Select = poll.isMultipleChoice ? CheckboxSelect : RadioSelect;
 
   return (
@@ -84,7 +109,7 @@ export default function VoteForm({ poll, onVote, onShowResults, voteId }: Props)
                   ? "Tria una o més opcions"
                   : "Tria una opció"
               }
-              options={poll.answers.map(answerToOption)}
+              options={pollOptions}
               values={values.answers}
               onChange={(o) => setFieldValue("answers", o)}
               error={

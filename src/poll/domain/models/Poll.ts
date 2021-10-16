@@ -68,7 +68,7 @@ export class Poll implements IPoll {
     return answersWithVotes;
   }
 
-  get mostVotedAnswer(): Answer {
+  get mostVotedAnswer(): AnswerWithVotes {
     if (!this.answers?.length) {
       return null;
     }

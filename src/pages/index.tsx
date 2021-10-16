@@ -11,7 +11,7 @@ export default function Home() {
     const { poll, err } = await pollRepository.createPoll(p);
     if (err) {
       // TODO: Handle potential error by displaying a toaster
-      console.log(err.message);
+      console.error(err.message);
     } else {
       setPoll(poll);
     }
