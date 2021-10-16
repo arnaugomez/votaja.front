@@ -27,11 +27,11 @@ export default function Input({
       {label && <p className="text-sm pt-2 pb-1 font-medium">{label}</p>}
       <div
         className={
-          "bg-white pb-2 pt-1.5 px-3.5 rounded-lg border w-full " + borderColor
+          "bg-white py-2 px-3.5 rounded-lg border w-full " + borderColor
         }
       >
         <input
-          className="appearance-none outline-none w-full text-sm placeholder-gray-500 text-gray-800 focus:text-black"
+          className="appearance-none outline-none w-full placeholder-gray-500 text-gray-700 font-light focus:text-black"
           type={type}
           {...props}
         />

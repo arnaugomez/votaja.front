@@ -10,7 +10,7 @@ interface Props {
 export default function BadgeTextSelector({ value, options, onChange }: Props) {
   const valueExists = options.some((o) => o === value);
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className="flex flex-wrap">
       {options.map((o) => {
         const isActive = value === o;
         return (
@@ -18,7 +18,7 @@ export default function BadgeTextSelector({ value, options, onChange }: Props) {
             <button
               type="button"
               onClick={() => onChange(o)}
-              className="appearance-none"
+              className="appearance-none pr-2 pb-2"
             >
               <Badge>{o}</Badge>
             </button>

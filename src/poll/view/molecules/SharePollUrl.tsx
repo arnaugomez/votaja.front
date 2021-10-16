@@ -28,7 +28,7 @@ export default function SharePollUrl({ poll }: Props) {
         Comparteix-la per Whatsapp i a les xarxes:
       </Description>
       <Button onClick={copyUrl} fullWidth>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center space-x-2">
           <div className="h-4 w-4">
             <LinkIcon />
           </div>
