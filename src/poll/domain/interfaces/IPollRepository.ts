@@ -6,5 +6,5 @@ export type PollPromise = Promise<Data<{ poll: Poll }>>;
 export interface IPollRepository {
   createPoll(p: Poll): PollPromise;
   getPollBySlug(slug: string): PollPromise;
-  // updatePoll(slug: string, p: Poll): Promise<Error>
+  updatePoll(p: Poll): Promise<Err>
 }
