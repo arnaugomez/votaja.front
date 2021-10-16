@@ -1,6 +1,9 @@
 import { Poll } from "./../models/Poll";
 export default function getSimiarVotesPercent(p: Poll, voteId: string): number {
-  const myVote = p.votes.find((v) => (v.id = voteId));
+  const myVote = p.votes.find((v) => (v.id === voteId));
+  if(!myVote) {
+    return 0
+  }
 
   const votesLikeMineAmount = p.votes.reduce((prev, current) => {
     /*

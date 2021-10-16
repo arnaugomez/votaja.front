@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function Vote({ poll }: Props) {
-  const voteId = useMemo(() => v4(), []);
+  const voteId = useMemo(() => v4(), [poll]);
   const [newPoll, setNewPoll] = useState<Poll>(null);
   const [showResults, setShowResults] = useState(false);
   const p = newPoll ?? poll;
@@ -22,7 +22,7 @@ export default function Vote({ poll }: Props) {
 
     if (err) {
       // TODO: Handle error by showing toaster
-      console.log(err.message);
+      console.error(err.message);
     } else {
       setShowResults(true);
       setNewPoll(newPoll);
@@ -31,7 +31,7 @@ export default function Vote({ poll }: Props) {
   return (
     <section className="pt-8 pb-12">
       <MaxWidth>
-        <VoteHero poll={p} />
+        <VoteHero poll={p} showDescription={!showResults} />
         {showResults ? (
           <PollResults
             voteId={voteId}
