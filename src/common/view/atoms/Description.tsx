@@ -1,8 +1,6 @@
-import React from 'react'
-import { CProps } from '../view-models/CProps'
+import React from "react";
+import { CCnProps } from "../view-models/CProps";
 
-export default function Description({children}: CProps) {
-  return (
-      <p className="text-sm text-gray-700">{children}</p>
-  )
+export default function Description({ children, className }: CCnProps) {
+  return <p className={"text-sm text-gray-700 " + className}>{children}</p>;
 }
