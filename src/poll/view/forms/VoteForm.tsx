@@ -9,7 +9,7 @@ import Input from "../../../common/view/atoms/Input";
 import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
 import { answerToOption } from "../presenters/answerToOption";
 import RadioSelect from "../../../common/view/molecules/RadioSelect";
-import {v4} from 'uuid'
+import { v4 } from "uuid";
 
 interface FormValues {
   name: string;
@@ -23,6 +23,7 @@ const initialValues: FormValues = {
 
 interface Props {
   poll: Poll;
+  voteId: string;
   onVote: (newPoll: Poll) => Promise<void>;
   onShowResults: () => void;
 }
@@ -32,18 +33,18 @@ const schema = yup.object().shape({
   answers: yup.array().required().min(1, "Escull una opció."),
 });
 
-export default function VoteForm({ poll, onVote, onShowResults }: Props) {
+export default function VoteForm({ poll, onVote, onShowResults, voteId }: Props) {
   function handleSubmit(
     values: FormValues,
     helpers: FormikHelpers<FormValues>
   ) {
     const pollObj = poll.toObject();
     pollObj.votes.push({
-      id: v4(),
+      id: voteId,
       answers: values.answers.map((a) => a.value),
       name: values.name,
     });
-    onVote(new Poll(pollObj)).then(() => helpers.setSubmitting(false));
+    onVote(new Poll(pollObj));
   }
   console.log(poll.isMultipleChoice);
   const Select = poll.isMultipleChoice ? CheckboxSelect : RadioSelect;
@@ -62,7 +63,7 @@ export default function VoteForm({ poll, onVote, onShowResults }: Props) {
         handleChange,
         isSubmitting,
         setFieldValue,
-        handleSubmit
+        handleSubmit,
       }) {
         return (
           <form onSubmit={handleSubmit}>

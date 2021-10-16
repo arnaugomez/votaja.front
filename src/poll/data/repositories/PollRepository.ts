@@ -60,7 +60,7 @@ class PollRepository implements IPollRepository {
       };
     }
     const data = p.data();
-    return { poll: toPollDomain(data as FPoll) };
+    return { poll: toPollDomain(data as FPoll, p.id) };
   }
 
   async updatePoll(p: Poll): Promise<Err> {

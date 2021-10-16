@@ -4,7 +4,6 @@ import { FVote } from './FVote';
 
 /** Model of a poll as is stored in FireStore */
 export interface FPoll extends TitleDescription {
-  id?: string;
   slug: string;
 
   isMultipleChoice: boolean;
