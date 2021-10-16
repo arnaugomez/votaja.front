@@ -6,7 +6,7 @@ interface Props {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   name?: string;
-  label?: React.ReactNode;
+  label: React.ReactNode;
   error?: string;
 }
 
@@ -17,7 +17,7 @@ export default function Checkbox({
   ...props
 }: Props) {
   return (
-    <label className="block pb-2">
+    <label className="block pb-3 text-gray-700 hover:text-gray-800">
       <div className="relative flex gap-2 pl-1">
         <input
           className="absolute h-4 w-4 opacity-0"
@@ -25,10 +25,10 @@ export default function Checkbox({
           checked={checked}
           {...props}
         />
-        <div className="h-5 w-5 border border-gray-400 rounded grid place-items-center">
+        <div className="flex-none h-5 w-5 border border-gray-400 rounded grid place-items-center">
           {checked && <CheckIcon />}
         </div>
-        <p className="text-sm leading-loos3 text-gray-700">{label}</p>
+        <p className="text-sm">{label}</p>
       </div>
       {error && <p className="text-xs pt-1 text-red">{label}</p>}
     </label>

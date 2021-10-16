@@ -60,7 +60,7 @@ const schema = yup.object().shape({
       }
     ),
   isMultipleChoice: yup.bool().required(),
-  email: yup.string().notRequired(),
+  email: yup.string().email("Escriu un email vàlid").notRequired(),
   votesMax: yup.string().notRequired(),
 });
 
@@ -136,7 +136,7 @@ export default function CreatePoll({ onCreate }: Props) {
                     <Checkbox
                       label="Permet resposta múltiple"
                       value={values.isMultipleChoice}
-                      name="isMultiple"
+                      name="isMultipleChoice"
                       onChange={handleChange}
                     />
                     <Input

@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+      fontSize: {
+        xxs: "0.6rem"
+      },
       colors: {
         primary: {
           25: "#FAFAFF",
