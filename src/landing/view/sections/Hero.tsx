@@ -3,14 +3,13 @@ import H1 from "../../../common/view/atoms/H1";
 import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import SImg from "../../../common/view/atoms/SImg";
 import Subtitle from "../../../common/view/atoms/Subtitle";
+import HeroImg from "../atoms/HeroImg";
 
 export default function Hero() {
   return (
     <section className="pt-8 pb-12">
       <MaxWidth>
-        <figure className="relative h-20 overflow-hidden rounded">
-          <SImg layout="fill" objectFit="cover" />
-        </figure>
+        <HeroImg/>
         <H1 className="pt-4 uppercase font-bold italic leading-none transform -translate-x-2">
           Vota<span className="text-primary">ja</span>
         </H1>

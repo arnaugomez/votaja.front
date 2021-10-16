@@ -1,26 +1,29 @@
 import { Vote } from "./Vote";
 import { TitleDescription } from "./../../../common/domain/models/TitleDescription";
 import { Answer, AnswerWithVotes } from "./Answer";
+import { cleanse } from "../../../common/util/cleanse";
 
 export class Poll implements IPoll {
-  title: IPoll["title"];
-  description: IPoll["description"];
-  isMultipleChoice: IPoll["isMultipleChoice"];
   answers: IPoll["answers"];
-  name?: IPoll["name"];
+  description: IPoll["description"];
   email?: IPoll["email"];
+  id: IPoll["id"];
+  isMultipleChoice: IPoll["isMultipleChoice"];
+  name?: IPoll["name"];
+  slug: IPoll["slug"];
+  title: IPoll["title"];
   votes: IPoll["votes"];
   votesMax: IPoll["votesMax"];
-  slug: IPoll["slug"];
 
   constructor(p: IPoll) {
+    this.answers = p.answers;
+    this.description = p.description;
+    this.email = p.email;
+    this.id = p.id;
+    this.isMultipleChoice = p.isMultipleChoice;
+    this.name = p.name;
     this.slug = p.slug;
     this.title = p.title;
-    this.description = p.description;
-    this.isMultipleChoice = p.isMultipleChoice;
-    this.answers = p.answers;
-    this.name = p.name;
-    this.email = p.email;
     this.votes = p.votes;
     this.votesMax = p.votesMax;
   }
@@ -29,25 +32,27 @@ export class Poll implements IPoll {
     const {
       answers,
       description,
+      email,
+      id,
       isMultipleChoice,
+      name,
+      slug,
       title,
       votes,
-      email,
-      name,
       votesMax,
-      slug,
     } = this;
-    return {
+    return cleanse({
       answers,
       description,
+      email,
+      id,
       isMultipleChoice,
+      name,
+      slug,
       title,
       votes,
-      email,
-      name,
       votesMax,
-      slug,
-    };
+    });
   }
 
   get answersWithVotes(): AnswerWithVotes[] {
@@ -65,6 +70,7 @@ export class Poll implements IPoll {
 }
 
 export interface IPoll extends TitleDescription {
+  id?: string;
   slug?: string;
   isMultipleChoice: boolean;
   answers: Answer[];

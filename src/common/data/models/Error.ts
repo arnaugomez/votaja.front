@@ -8,3 +8,5 @@ export class Err {
     return "Error: " + this.message;
   }
 }
+
+export type Data<T extends object> = { err?: Err } & T;

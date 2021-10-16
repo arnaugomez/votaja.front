@@ -1,3 +1,5 @@
+import { FPoll } from "./../models/FPoll";
+import { toPollDomain } from "./../transformers/toPollDomain";
 import { toFPoll } from "./../presenters/toFPoll";
 import {
   addDoc,
@@ -6,7 +8,7 @@ import {
 } from "@firebase/firestore";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../common/data/firebase";
-import { Err } from "../../../common/data/models/Error";
+import { Data, Err } from "../../../common/data/models/Error";
 import { Poll } from "../../domain/models/Poll";
 import { IPollRepository } from "./../../domain/interfaces/IPollRepository";
 import slugify from "slugify";
@@ -33,7 +35,7 @@ class PollRepository implements IPollRepository {
     return getCompositeSlug(slug, num);
   }
 
-  async createPoll(poll: Poll): Promise<{ poll: Poll; err?: Err }> {
+  async createPoll(poll: Poll): Promise<Data<{ poll: Poll }>> {
     poll.slug = await this.slugify(poll.title);
     const fpoll = toFPoll(poll);
 
@@ -45,6 +47,18 @@ class PollRepository implements IPollRepository {
     }
 
     return { poll, err: null };
+  }
+
+  async getPollBySlug(slug: string): Promise<Data<{ poll: Poll }>> {
+    const p = await this.fetchPollBySlug(slug);
+    if (p === null) {
+      return {
+        err: new Err(`Poll with slug ${slug} does not exist`),
+        poll: null,
+      };
+    }
+    const data = p.data();
+    return { poll: toPollDomain(data as FPoll) };
   }
 }
 
