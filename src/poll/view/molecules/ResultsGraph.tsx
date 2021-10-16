@@ -53,7 +53,7 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
                   </div>
                 </div>
               </div>
-              {moreInfo && v.votesAmount && (
+              {moreInfo && !!v.votesAmount && (
                 <div className="flex text-gray-600 space-x-2 pl-2">
                   <div className="relative block flex-none h-4 w-4">
                     <UserAddIcon />
