@@ -88,7 +88,7 @@ export default function CreatePoll({ onCreate }: Props) {
   }
 
   return (
-    <section className="pb-10">
+    <section className="pb-16">
       <MaxWidth>
         <Formik<FormValues>
           initialValues={initialValues}
