@@ -26,7 +26,7 @@ export default function Footer() {
         <p className="pt-6 text-xs text-center leading-relaxed text-gray-600">
           És un projecte de <a>Pancripto Labs</a>, fet per Arnau Gómez. Es pronuncia com tu vulguis.
         </p>
-        <div className="flex space-x-2 pt-8">
+        <div className="flex space-x-4 pt-8">
           <Button
             variant="subtle"
             color="boring"
@@ -38,7 +38,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Proposa una millora
+              Proposa millora
             </a>
           </Button>
           <Button
