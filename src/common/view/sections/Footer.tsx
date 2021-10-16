@@ -48,7 +48,7 @@ export default function Footer() {
             fullWidth
             className="flex-1 text-sm"
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center space-x-2">
               <div className="h-4 w-4">
                 <LinkIcon />
               </div>

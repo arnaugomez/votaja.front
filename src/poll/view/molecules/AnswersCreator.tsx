@@ -57,7 +57,7 @@ export default function AnswersCreator({
 
       <ul ref={ulRef}>
         {values.map(({ label, value }) => (
-          <li key={value} className="flex gap-3">
+          <li key={value} className="flex space-x-3">
             <Input
               fullWidth
               onChange={(e) => changeText({ value, label: e.target.value })}

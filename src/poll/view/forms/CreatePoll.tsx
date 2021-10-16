@@ -128,7 +128,7 @@ export default function CreatePoll({ onCreate }: Props) {
                   onChange={(v) => setFieldValue("title", v)}
                 />
 
-                <div className="p-4" />
+                <div className="h-5" />
 
                 <AnswersCreator
                   values={values.answers}

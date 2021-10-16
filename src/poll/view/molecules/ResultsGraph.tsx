@@ -58,13 +58,13 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
                   <div className="relative block flex-none h-4 w-4">
                     <UserAddIcon />
                   </div>
-                  <ul className="flex-1 text-xs  flex flex-wrap gap-1 items-center">
+                  <ul className="flex-1 text-xs  flex flex-wrap items-center">
                     {poll.votes
                       .filter((vote) =>
                         vote.answers.some((answer) => answer === v.id)
                       )
                       .map((vote) => (
-                        <li key={vote.id}>{vote.name}, </li>
+                        <li className="pr-1 pb-1" key={vote.id}>{vote.name}, </li>
                       ))}
                   </ul>
                 </div>

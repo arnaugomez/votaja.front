@@ -35,7 +35,7 @@ export default function SharePollEmbed({ poll }: Props) {
         pàgina web:
       </Description>
       <Button onClick={copyUrl} fullWidth>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center space-x-2">
           <CopyIcon />
           {urlCopied ? <div>Copiat!</div> : <div>Copia l&apos;embed</div>}
         </div>

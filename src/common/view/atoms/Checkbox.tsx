@@ -18,7 +18,7 @@ export default function Checkbox({
 }: Props) {
   return (
     <label className="block pb-3 text-gray-700 hover:text-gray-800">
-      <div className="relative flex gap-2 pl-1">
+      <div className="relative flex space-x-2 pl-1">
         <input
           className="absolute h-4 w-4 opacity-0"
           type="checkbox"
