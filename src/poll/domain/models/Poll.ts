@@ -11,8 +11,10 @@ export class Poll implements IPoll {
   email?: IPoll["email"];
   votes: IPoll["votes"];
   votesMax: IPoll["votesMax"];
+  slug: IPoll["slug"];
 
   constructor(p: IPoll) {
+    this.slug = p.slug;
     this.title = p.title;
     this.description = p.description;
     this.isMultipleChoice = p.isMultipleChoice;
@@ -33,6 +35,7 @@ export class Poll implements IPoll {
       email,
       name,
       votesMax,
+      slug,
     } = this;
     return {
       answers,
@@ -43,6 +46,7 @@ export class Poll implements IPoll {
       email,
       name,
       votesMax,
+      slug,
     };
   }
 
@@ -61,6 +65,7 @@ export class Poll implements IPoll {
 }
 
 export interface IPoll extends TitleDescription {
+  slug?: string;
   isMultipleChoice: boolean;
   answers: Answer[];
   name?: string;

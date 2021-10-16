@@ -33,19 +33,18 @@ class PollRepository implements IPollRepository {
     return getCompositeSlug(slug, num);
   }
 
-  async createPoll(p: Poll): Promise<Err> {
-    const slug = await this.slugify(p.title);
-    const poll = toFPoll(p, slug);
-    console.log(poll)
+  async createPoll(poll: Poll): Promise<{ poll: Poll; err?: Err }> {
+    poll.slug = await this.slugify(poll.title);
+    const fpoll = toFPoll(poll);
 
     try {
-      await addDoc(collection(db, "polls"), poll);
-    } catch(e) {
-      console.log(e)
-      return new Err("Could not save poll");
+      await addDoc(collection(db, "polls"), fpoll);
+    } catch (e) {
+      console.log(e);
+      return { poll: null, err: new Err("Could not save poll") };
     }
 
-    return null;
+    return { poll, err: null };
   }
 }
 
