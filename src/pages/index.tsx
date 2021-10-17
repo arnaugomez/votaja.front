@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "../landing/view/sections/Hero";
 import { pollRepository } from "../poll/data/repositories/PollRepository";
 import { Poll } from "../poll/domain/models/Poll";
@@ -12,7 +12,12 @@ import MainLayout from "../common/view/sections/MainLayout";
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "seo", "footer", "createPoll"])),
+      ...(await serverSideTranslations(locale, [
+        "common",
+        "seo",
+        "footer",
+        "createPoll",
+      ])),
       // Will be passed to the page component as props
     },
   };
@@ -43,6 +48,9 @@ export default function Home() {
       setShowShare(true);
     }
   }
+  useEffect(() => {
+    console.log(pollRepository.getPollBySlug("a"));
+  }, []);
 
   const goBack = () => setShowShare(false);
 
