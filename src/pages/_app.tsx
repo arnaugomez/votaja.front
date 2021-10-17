@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import MainLayout from "../common/view/sections/MainLayout";
+import { appWithTranslation } from "next-i18next";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -32,11 +33,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#2b5797" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
+      <Component {...pageProps} />
     </>
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);
