@@ -11,6 +11,7 @@ import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import { Vote } from "../../domain/models/Vote";
 import { answerToOption } from "../presenters/answerToOption";
+import { useTranslation } from "next-i18next";
 
 interface FormValues {
   name: string;
@@ -24,18 +25,13 @@ interface Props {
   onShowResults: () => void;
 }
 
-const schema = yup.object().shape({
-  name: yup.string().required("No t'oblidis del nom."),
-  answers: yup.array().required().min(1, "Escull una opció."),
-});
-
 export default function VoteForm({
   poll,
   onVote,
   onShowResults,
   voteId,
 }: Props) {
-  const pollOptions = useMemo(() => poll.answers.map(answerToOption), [poll])
+  const pollOptions = useMemo(() => poll.answers.map(answerToOption), [poll]);
   const currentVote = useMemo(
     () => poll.votes.find((v) => v.id === voteId),
     [poll, voteId]
@@ -43,14 +39,14 @@ export default function VoteForm({
   const initialValues: FormValues = useMemo(
     () => ({
       name: currentVote ? currentVote.name : "",
-      answers: currentVote ? currentVote.answers.map((a) => pollOptions.find(o => o.value === a)): [],
+      answers: currentVote
+        ? currentVote.answers.map((a) => pollOptions.find((o) => o.value === a))
+        : [],
     }),
     [currentVote]
   );
 
-  function handleSubmit(
-    values: FormValues,
-  ) {
+  function handleSubmit(values: FormValues) {
     const pollObj = poll.toObject();
     const newVote: Vote = {
       id: voteId,
@@ -68,6 +64,13 @@ export default function VoteForm({
   }
 
   const Select = poll.isMultipleChoice ? CheckboxSelect : RadioSelect;
+
+  const { t } = useTranslation("votePoll");
+
+  const schema = yup.object().shape({
+    name: yup.string().required(t("form.nameError")),
+    answers: yup.array().required().min(1, t("form.answersError")),
+  });
 
   return (
     <Formik<FormValues>
@@ -88,8 +91,8 @@ export default function VoteForm({
         return (
           <form onSubmit={handleSubmit}>
             <Input
-              label="Nom"
-              placeholder="Escriu el teu nom"
+              label={t("form.nameLabel")}
+              placeholder={t("form.namePlaceholder")}
               value={values.name}
               name="name"
               onChange={handleChange}
@@ -98,17 +101,17 @@ export default function VoteForm({
             />
             <div className="h-1" />
             <Checkbox
-              label="Anònim"
-              value={values.name === "Anònim"}
-              onChange={() => setFieldValue("name", 'Anònim')}
+              label={t("form.anonymous")}
+              value={values.name === t("form.anonymous")}
+              onChange={() => setFieldValue("name", t("form.anonymous"))}
             />
             <div className="h-6" />
 
             <Select<number>
               label={
                 poll.isMultipleChoice
-                  ? "Tria una o més opcions"
-                  : "Tria una opció"
+                  ? t("form.selectManyLabel")
+                  : t("form.selectOneLabel")
               }
               options={pollOptions}
               values={values.answers}
@@ -119,7 +122,7 @@ export default function VoteForm({
             />
             <div className="pt-8 flex justify-between">
               <Button variant="subtle" color="boring" onClick={onShowResults}>
-                Resultats
+                {t("results.results")}
               </Button>
               <Button
                 className="w-36 flex justify-center items-center"
@@ -130,7 +133,7 @@ export default function VoteForm({
                     <SpinIcon />
                   </div>
                 ) : (
-                  "Vota"
+                  t("vote")
                 )}
               </Button>
             </div>

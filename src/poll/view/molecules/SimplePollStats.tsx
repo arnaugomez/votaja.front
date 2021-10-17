@@ -1,6 +1,7 @@
 import React from "react";
 import { Poll } from "../../domain/models/Poll";
 import getSimiarVotesPercent from "../../domain/use-cases/getSimilarVotesPercent";
+import { useTranslation } from "next-i18next";
 
 export interface Props {
   poll: Poll;
@@ -23,25 +24,26 @@ function SimplePollStatsItem({
 }
 
 export default function SimplePollStats({ poll, voteId }: Props) {
+  const { t } = useTranslation("votePoll");
   return (
     <div className="flex divide-x pb-2">
       <SimplePollStatsItem
-        title="Opció més votada"
+        title={t("results.mostVoted")}
         value={poll.mostVotedAnswer.title}
       />
       {poll.votes.some((v) => v.id === voteId) ? (
         <SimplePollStatsItem
-          title="Ha votat com tu"
+          title={t("results.similarVotes")}
           value={`${getSimiarVotesPercent(poll, voteId)}%`}
         />
       ) : (
         <SimplePollStatsItem
-          title={poll.votesMax ? "Queden per votar" : "Han votat"}
+          title={poll.votesMax ? t("results.votesLeft") : t("results.haveVoted")}
           value={`${
             poll.votesMax
               ? poll.votesMax - poll.votes.length
               : poll.votes.length
-          } persones`}
+          } ${t('people')}`}
         />
       )}
     </div>

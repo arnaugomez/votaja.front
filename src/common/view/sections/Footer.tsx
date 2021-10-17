@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import MaxWidth from "../atoms/MaxWidth";
 import LinkIcon from "../../../../public/assets/icons/link.svg";
+import { useTranslation } from "next-i18next";
 
 export default function Footer() {
   const [urlCopied, setUrlCopied] = useState(false);
@@ -12,11 +13,13 @@ export default function Footer() {
     }
   }, [urlCopied, setUrlCopied]);
 
+  const { t: commonT } = useTranslation("common");
   function copyUrl() {
-    const url = "https://www.votaja.com/";
+    const url = `https://www.${commonT("localeUrl")}/`;
     navigator.clipboard.writeText(url);
     setUrlCopied(true);
   }
+  const { t } = useTranslation("footer");
   return (
     <section className="bg-gray-100 pt-12 pb-12">
       <MaxWidth>
@@ -24,7 +27,7 @@ export default function Footer() {
           VotaJa
         </p>
         <p className="pt-6 text-xs text-center leading-relaxed text-gray-600">
-          És un projecte de <a>Pancripto Labs</a>, fet per Arnau Gómez. Es pronuncia com tu vulguis.
+          {t("projectBy")} <a>Pancripto Labs</a>.
         </p>
         <div className="flex space-x-4 pt-8">
           <Button
@@ -38,7 +41,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Proposa millora
+              {t("suggestImprovement")}
             </a>
           </Button>
           <Button
@@ -52,7 +55,11 @@ export default function Footer() {
               <div className="h-4 w-4">
                 <LinkIcon />
               </div>
-              {urlCopied ? <div>Copiat!</div> : <div>Recomana&apos;m</div>}
+              {urlCopied ? (
+                <div>{t("copied")}!</div>
+              ) : (
+                <div>{t("recommend")}</div>
+              )}
             </div>
           </Button>
         </div>

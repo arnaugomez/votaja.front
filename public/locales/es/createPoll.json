@@ -1,0 +1,35 @@
+{
+  "copied": "Copiado",
+  "hero": {
+    "slogan": "Crea tu encuesta en segundos."
+  },
+  "error2options": "Escribe como mínimo 2 opciones.",
+  "error50options": "Has superado el máximo de 50 opciones.",
+  "titleLabel": "Pregunta de la encuesta (escríbela o escoge una)",
+  "titleError": "Escribe una pregunta",
+  "emailError": "Escribe un email válido",
+  "titleSugg1": "¿Dónde quedamos?",
+  "titleSugg2": "¿Qué restaurante prefieres?",
+  "titleSugg3": "¿A qué hora nos vemos?",
+  "titleSugg4": "¿Qué disco es mejor?",
+  "answersLabel": "Respuestas de la encuesta",
+  "form": {
+    "extraOptions": "Opciones extra",
+    "multipleChoiceLabel": "Permite respuesta múltiple",
+    "descriptionLabel": "Añade una descripción",
+    "descriptionPlaceholder": "Descripción de la encuesta",
+    "votesMaxLabel": "¿Cuánta gente respondrá a la encuesta?",
+    "votesMaxPlaceholder": "Escribe un número",
+    "emailLabel": "Te mandamos el enlace de la encuesta por correo?",
+    "emailPlaceholder": "ejemplo@votaja.com",
+    "submitButton": "Crea encuesta"
+  },
+  "share": {
+    "title": "Encuesta creada",
+    "changePoll": "Modifica",
+    "newPoll": "Nueva encuesta",
+    "embed1": "O copia y pega este código",
+    "embed2": "para mostrarla en tu página web:",
+    "copyEmbed": "Copia el embed"
+  }
+}

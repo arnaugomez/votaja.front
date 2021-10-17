@@ -1,0 +1,30 @@
+{
+  "poll": "Encuesta",
+  "vote": "Vota",
+  "people": "personas",
+  "hero": {
+    "haveVoted": "Han votado",
+    "createdBy": "creada por",
+    "createdWith": "creada con Votaja"
+  },
+  "results": {
+    "results": "Resultados",
+    "changeVote": "Canvia el voto",
+    "sharePoll": "Comparte la encuesta",
+    "stats": "Estadísticas",
+    "votes": "votos",
+    "mostVoted": "Opción más votada",
+    "similarVotes": "Han votado igual",
+    "votesLeft": "Quedan por votar",
+    "haveVoted": "Han votado"
+  },
+  "form": {
+    "nameError": "No te olvides del nombre",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Escribe tu nombre",
+    "answersError": "Escoge una opción",
+    "anonymous": "Anónimo",
+    "selectOneLabel": "Escoge una opción",
+    "selectManyLabel": "Tria una o más opciones"
+  }
+}

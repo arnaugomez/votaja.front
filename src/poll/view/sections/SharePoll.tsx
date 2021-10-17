@@ -8,6 +8,7 @@ import CelebrationImg from "../atoms/CelebrationImg";
 import SharePollEmbed from "../molecules/SharePollEmbed";
 import SharePollUrl from "../molecules/SharePollUrl";
 import BackIcon from "../../../../public/assets/icons/back.svg";
+import { useTranslation } from "next-i18next";
 
 interface Props {
   poll: Poll;
@@ -18,12 +19,13 @@ interface Props {
 export default function SharePoll({ poll, onGoBack, onNewPoll }: Props) {
   useConfetti();
 
+  const { t } = useTranslation("createPoll");
   return (
     <section className="pb-16">
       <MaxWidth>
         <div className="py-6 px-4 bg-gray-50 rounded-2xl">
           <CelebrationImg />
-          <H2 className="text-center pb-4">Enquesta creada</H2>
+          <H2 className="text-center pb-4">{t("share.title")}</H2>
 
           <SharePollUrl poll={poll} />
           <SharePollEmbed poll={poll} />
@@ -38,7 +40,7 @@ export default function SharePoll({ poll, onGoBack, onNewPoll }: Props) {
             <div className="h-5 w-5">
               <BackIcon />
             </div>
-            <div>Modifica</div>
+            <div>{t("share.changePoll")}</div>
           </Button>
           <Button
             className="text-sm flex items-center justify-center"
@@ -46,7 +48,7 @@ export default function SharePoll({ poll, onGoBack, onNewPoll }: Props) {
             color="boring"
             onClick={onNewPoll}
           >
-            <div>Nova enquesta</div>
+            <div>{t("share.newPoll")}</div>
           </Button>
         </div>
       </MaxWidth>

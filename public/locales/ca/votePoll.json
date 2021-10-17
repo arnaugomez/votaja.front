@@ -1,0 +1,30 @@
+{
+  "poll": "Enquesta",
+  "vote": "Vota",
+  "people": "persones",
+  "hero": {
+    "haveVoted": "Han votat",
+    "createdBy": "creada per",
+    "createdWith": "creada amb Votaja"
+  },
+  "results": {
+    "results": "Resultats",
+    "changeVote": "Canvia el vot",
+    "sharePoll": "Comparteix l'enquesta",
+    "stats": "Estadístiques",
+    "votes": "vots",
+    "mostVoted": "Opció més votada",
+    "similarVotes": "Han votat igual",
+    "votesLeft": "Queden per votar",
+    "haveVoted": "Han votat"
+  },
+  "form": {
+    "nameError": "No t'oblidis del nom",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Escriu el teu nom",
+    "answersError": "Escull una opció",
+    "anonymous": "Anònim",
+    "selectOneLabel": "Tria una opció",
+    "selectManyLabel": "Tria una o més opcions"
+  }
+}
