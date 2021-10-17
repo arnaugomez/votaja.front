@@ -1,16 +1,16 @@
-import { Formik, FormikHelpers } from "formik";
+import { Formik } from "formik";
 import React, { useMemo } from "react";
-import { Option } from "../../../common/view/view-models/Option";
-import { Poll } from "../../domain/models/Poll";
 import * as yup from "yup";
-import Button from "../../../common/view/atoms/Button";
 import SpinIcon from "../../../../public/assets/icons/spin.svg";
+import Button from "../../../common/view/atoms/Button";
+import Checkbox from "../../../common/view/atoms/Checkbox";
 import Input from "../../../common/view/atoms/Input";
 import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
-import { answerToOption } from "../presenters/answerToOption";
 import RadioSelect from "../../../common/view/molecules/RadioSelect";
+import { Option } from "../../../common/view/view-models/Option";
+import { Poll } from "../../domain/models/Poll";
 import { Vote } from "../../domain/models/Vote";
-import Checkbox from "../../../common/view/atoms/Checkbox";
+import { answerToOption } from "../presenters/answerToOption";
 
 interface FormValues {
   name: string;

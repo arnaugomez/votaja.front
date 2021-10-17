@@ -42,7 +42,8 @@ class PollRepository implements IPollRepository {
     const fpoll = toFPoll(poll);
 
     try {
-      await addDoc(collection(db, "polls"), fpoll);
+      const docref = await addDoc(collection(db, "polls"), fpoll);
+      poll.id = docref.id
     } catch (e) {
       console.error(e);
       return { poll: null, err: new Err("Could not save poll") };

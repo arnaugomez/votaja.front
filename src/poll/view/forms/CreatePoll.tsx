@@ -1,9 +1,7 @@
-import { deleteField } from "@firebase/firestore";
-import { Formik, FormikHelpers, FormikValues } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import * as yup from "yup";
 import CogIcon from "../../../../public/assets/icons/cog.svg";
-// TODO: Change spin icon
 import SpinIcon from "../../../../public/assets/icons/spin.svg";
 import BadgeTextSelector from "../../../common/view/atoms/BadgeTextSelector";
 import Button from "../../../common/view/atoms/Button";
@@ -14,6 +12,7 @@ import MaxWidth from "../../../common/view/atoms/MaxWidth";
 import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import AnswersCreator from "../molecules/AnswersCreator";
+import { answerToOption } from "../presenters/answerToOption";
 
 export interface FormValues {
   title: string;
@@ -24,20 +23,6 @@ export interface FormValues {
   email: string;
   votesMax: string;
 }
-
-const initialValues: FormValues = {
-  title: "",
-  description: "",
-  answers: [
-    {
-      label: "",
-      value: 1,
-    },
-  ],
-  isMultipleChoice: false,
-  email: "",
-  votesMax: "",
-};
 
 const schema = yup.object().shape({
   title: yup.string().required("Escriu una pregunta."),
@@ -66,10 +51,11 @@ const schema = yup.object().shape({
 });
 
 interface Props {
+  poll: Poll;
   onCreate: (poll: Poll) => Promise<void>;
 }
 
-export default function CreatePoll({ onCreate }: Props) {
+export default function CreatePoll({ poll, onCreate }: Props) {
   const [showExtraOptions, setShowExtraOptions] = useState(false);
 
   function handleSubmit(
@@ -77,16 +63,39 @@ export default function CreatePoll({ onCreate }: Props) {
     helpers: FormikHelpers<FormValues>
   ) {
     const votesMaxInt = parseInt(values.votesMax);
-    const poll = new Poll({
+    const newPoll = new Poll({
+      ...(poll?.toObject() ?? {}),
       ...values,
       votesMax: votesMaxInt ? votesMaxInt : null,
       answers: values.answers.map((a) => ({ id: a.value, title: a.label })),
       votes: [],
     });
-    onCreate(poll).then(() => {
+    onCreate(newPoll).then(() => {
       helpers.setSubmitting(false);
     });
   }
+  const initialValues: FormValues = !poll
+    ? {
+        title: "",
+        description: "",
+        answers: [
+          {
+            label: "",
+            value: 1,
+          },
+        ],
+        isMultipleChoice: false,
+        email: "",
+        votesMax: "",
+      }
+    : {
+        title: poll.title,
+        description: poll.description,
+        answers: poll.answers.map(answerToOption),
+        isMultipleChoice: poll.isMultipleChoice,
+        email: poll.email,
+        votesMax: poll.votesMax?.toString(),
+      };
 
   return (
     <section className="pb-16">

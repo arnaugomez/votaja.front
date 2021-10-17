@@ -52,7 +52,7 @@ export default function Footer() {
               <div className="h-4 w-4">
                 <LinkIcon />
               </div>
-              {urlCopied ? <div>Copiat!</div> : <div>Comparteix</div>}
+              {urlCopied ? <div>Copiat!</div> : <div>Recomana&apos;m</div>}
             </div>
           </Button>
         </div>
