@@ -13,6 +13,7 @@ import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import AnswersCreator from "../molecules/AnswersCreator";
 import { answerToOption } from "../presenters/answerToOption";
+import { useTranslation } from "next-i18next";
 
 export interface FormValues {
   title: string;
@@ -24,32 +25,6 @@ export interface FormValues {
   votesMax: string;
 }
 
-const schema = yup.object().shape({
-  title: yup.string().required("Escriu una pregunta."),
-  description: yup.string().notRequired(),
-  answers: yup
-    .array()
-    .required()
-    .min(2, "Escriu com a mínim 2 opcions.")
-    .max(50, "Has superat el màxim de 50 opcions.")
-    .test(
-      "two-options-not-blank",
-      "Escriu com a mínim 2 opcions.",
-      (answers) => {
-        const completedAnswers = answers.reduce((prev, a) => {
-          if (a.label?.length > 0) {
-            return prev + 1;
-          }
-          return prev;
-        }, 0);
-        return completedAnswers > 1;
-      }
-    ),
-  isMultipleChoice: yup.bool().required(),
-  email: yup.string().email("Escriu un email vàlid").notRequired(),
-  votesMax: yup.string().notRequired(),
-});
-
 interface Props {
   poll: Poll;
   onCreate: (poll: Poll) => Promise<void>;
@@ -57,6 +32,8 @@ interface Props {
 
 export default function CreatePoll({ poll, onCreate }: Props) {
   const [showExtraOptions, setShowExtraOptions] = useState(false);
+
+  const { t } = useTranslation("createPoll");
 
   function handleSubmit(
     values: FormValues,
@@ -74,6 +51,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
       helpers.setSubmitting(false);
     });
   }
+
   const initialValues: FormValues = !poll
     ? {
         title: "",
@@ -97,6 +75,28 @@ export default function CreatePoll({ poll, onCreate }: Props) {
         votesMax: poll.votesMax?.toString(),
       };
 
+  const schema = yup.object().shape({
+    title: yup.string().required(t("titleError")),
+    description: yup.string().notRequired(),
+    answers: yup
+      .array()
+      .required()
+      .min(2, t("error2options"))
+      .max(50, t("error50options"))
+      .test("two-options-not-blank", t("error2options"), (answers) => {
+        const completedAnswers = answers.reduce((prev, a) => {
+          if (a.label?.length > 0) {
+            return prev + 1;
+          }
+          return prev;
+        }, 0);
+        return completedAnswers > 1;
+      }),
+    isMultipleChoice: yup.bool().required(),
+    email: yup.string().email(t("emailError")).notRequired(),
+    votesMax: yup.string().notRequired(),
+  });
+
   return (
     <section className="pb-16">
       <MaxWidth>
@@ -119,7 +119,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
               <form onSubmit={handleSubmit}>
                 <Input
                   fullWidth
-                  label="Pregunta de l'enquesta (escriu-la o tria una)"
+                  label={t("titleLabel")}
                   name="title"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -128,10 +128,10 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                 />
                 <BadgeTextSelector
                   options={[
-                    "A on quedem?",
-                    "Quin restaurant preferiu?",
-                    "A quina hora ens veiem?",
-                    "Quina disco és millor?",
+                    t("titleSugg1"),
+                    t("titleSugg2"),
+                    t("titleSugg3"),
+                    t("titleSugg4"),
                   ]}
                   value={values.title}
                   onChange={(v) => setFieldValue("title", v)}
@@ -142,7 +142,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                 <AnswersCreator
                   values={values.answers}
                   onChange={(a) => setFieldValue("answers", a)}
-                  label="Respostes de l'enquesta"
+                  label={t("answersLabel")}
                   error={
                     errors.answers &&
                     touched.answers &&
@@ -152,17 +152,19 @@ export default function CreatePoll({ poll, onCreate }: Props) {
 
                 {showExtraOptions && (
                   <div className="p-2 pb-0 bg-gray-100 rounded-lg mt-4">
-                    <H3 className="pb-3 text-center">Opcions extra</H3>
+                    <H3 className="pb-3 text-center">
+                      {t("form.extraOptions")}
+                    </H3>
                     <Checkbox
-                      label="Permet resposta múltiple"
+                      label={t("form.multipleChoiceLabel")}
                       value={values.isMultipleChoice}
                       name="isMultipleChoice"
                       onChange={handleChange}
                     />
                     <Input
-                      label="Afegeix una descripció"
+                      label={t("form.descriptionLabel")}
                       name="description"
-                      placeholder="Descripció de l'enquesta"
+                      placeholder={t("form.descriptionPlaceholder")}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.description}
@@ -175,8 +177,8 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                     <Input
                       type="number"
                       fullWidth
-                      label="Quanta gent respondrà a l'enquesta?"
-                      placeholder="Escriu un número"
+                      label={t("form.votesMaxLabel")}
+                      placeholder={t("form.votesMaxPlaceholder")}
                       name="votesMax"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -187,8 +189,8 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                     />
                     <Input
                       fullWidth
-                      label="T'enviem l'enllaç de l'enquesta per correu?"
-                      placeholder="exemple@votaja.com"
+                      label={t("form.emailLabel")}
+                      placeholder={t("form.emailPlaceholder")}
                       name="email"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -220,7 +222,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                         <SpinIcon />
                       </div>
                     ) : (
-                      "Crea enquesta"
+                      t("form.submitButton")
                     )}
                   </Button>
                 </div>

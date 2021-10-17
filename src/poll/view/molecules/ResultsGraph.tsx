@@ -8,6 +8,7 @@ export interface Props {
   moreInfo: boolean;
 }
 
+import { useTranslation } from "next-i18next";
 export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
   const [showBars, setShowBars] = useState(false);
   useEffect(() => setShowBars(true), []);
@@ -15,14 +16,15 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
   const myAnswers = poll.votes.find((v) => v.id === voteId)?.answers ?? [];
 
   const votesNum = poll.votes.length;
+  const { t } = useTranslation("votePoll");
   return (
     <div className="pt-4">
-      <h3 className="text-sm pt-2 pb-3 font-medium">Estadístiques</h3>
+      <h3 className="text-sm pt-2 pb-3 font-medium">{t("results.stats")}</h3>
       <ul className="space-y-3">
         {poll.answersWithVotes.map((v) => {
           const votesPercent = Math.floor((v.votesAmount * 100) / votesNum);
           const bigBar = votesPercent > 50;
-          const votesNumLabel = `${v.votesAmount} vots`;
+          const votesNumLabel = `${v.votesAmount} ${t('results.votes')}`;
           const isMine = myAnswers.some((a) => a === v.id);
           return (
             <li
@@ -64,7 +66,9 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
                         vote.answers.some((answer) => answer === v.id)
                       )
                       .map((vote) => (
-                        <li className="pr-1 pb-1" key={vote.id}>{vote.name}, </li>
+                        <li className="pr-1 pb-1" key={vote.id}>
+                          {vote.name},{" "}
+                        </li>
                       ))}
                   </ul>
                 </div>
