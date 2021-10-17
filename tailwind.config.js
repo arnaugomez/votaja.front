@@ -58,6 +58,7 @@ module.exports = {
   variants: {
     extend: {
       ringWidth: "hover",
+      borderColor: "hover",
     },
   },
   plugins: [],
