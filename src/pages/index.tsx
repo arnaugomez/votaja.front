@@ -7,6 +7,7 @@ import SharePoll from "../poll/view/sections/SharePoll";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import MainLayout from "../common/view/sections/MainLayout";
 
 export async function getStaticProps({ locale }) {
   return {
@@ -47,7 +48,7 @@ export default function Home() {
 
   const { t: seoT } = useTranslation("seo");
   return (
-    <>
+    <MainLayout>
       <Head>
         <title>Votaja: {seoT("title")} | VOTAJA</title>
         <meta name="description" content={seoT("description")} />
@@ -70,6 +71,6 @@ export default function Home() {
           onCreate={(p) => (poll ? updatePoll(p) : createPoll(p))}
         />
       )}
-    </>
+    </MainLayout>
   );
 }
