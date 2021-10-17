@@ -8,6 +8,7 @@ import Head from "next/head";
 
 export default function Home() {
   const [poll, setPoll] = useState<Poll>(null);
+  const [showShare, setShowShare] = useState(false);
   async function createPoll(p: Poll) {
     const { poll, err } = await pollRepository.createPoll(p);
     if (err) {
@@ -15,8 +16,23 @@ export default function Home() {
       console.error(err.message);
     } else {
       setPoll(poll);
+      setShowShare(true);
     }
   }
+
+  async function updatePoll(p: Poll) {
+    console.log(p);
+    const err = await pollRepository.updatePoll(p);
+    if (err) {
+      // TODO: Handle potential error by displaying a toaster
+      console.error(err.message);
+    } else {
+      setPoll(p);
+      setShowShare(true);
+    }
+  }
+
+  const goBack = () => setShowShare(false);
 
   return (
     <>
@@ -33,7 +49,21 @@ export default function Home() {
         <meta name="author" content="Arnau Gómez" />
       </Head>
       <Hero />
-      {poll ? <SharePoll poll={poll} /> : <CreatePoll onCreate={createPoll} />}
+      {showShare ? (
+        <SharePoll
+          poll={poll}
+          onGoBack={goBack}
+          onNewPoll={() => {
+            setPoll(null);
+            goBack();
+          }}
+        />
+      ) : (
+        <CreatePoll
+          poll={poll}
+          onCreate={(p) => (poll ? updatePoll(p) : createPoll(p))}
+        />
+      )}
     </>
   );
 }

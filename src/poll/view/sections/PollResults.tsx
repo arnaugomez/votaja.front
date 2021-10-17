@@ -39,7 +39,11 @@ export default function PollResults({
             color={hasVoted ? "warning" : "primary"}
             onClick={onGoToVoteForm}
           >
-            {!hasVoted && <BackIcon />}
+            {!hasVoted && (
+              <div className="h-5 w-5">
+                <BackIcon />
+              </div>
+            )}
             <div>{hasVoted ? "Canvia el vot" : "Vota"}</div>
           </Button>
           <Button

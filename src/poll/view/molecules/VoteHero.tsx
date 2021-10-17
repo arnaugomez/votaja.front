@@ -1,7 +1,5 @@
 import React from "react";
-import H1 from "../../../common/view/atoms/H1";
 import Pretitle from "../../../common/view/atoms/Pretitle";
-import Subtitle from "../../../common/view/atoms/Subtitle";
 import HeroImg from "../../../landing/view/atoms/HeroImg";
 import { Poll } from "../../domain/models/Poll";
 
