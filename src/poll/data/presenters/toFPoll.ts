@@ -10,6 +10,5 @@ export const toFPoll = (p: Poll): FPoll => cleanse({
   answers: p.answers,
   name: p.name,
   email: p.email,
-  votes: p.votes,
   votesMax: p.votesMax,
 });
