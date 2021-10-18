@@ -94,7 +94,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
       }),
     isMultipleChoice: yup.bool().required(),
     email: yup.string().email(t("emailError")).notRequired(),
-    votesMax: yup.string().notRequired(),
+    votesMax: yup.number().notRequired().min(2, t('form.votesMaxError')),
   });
 
   return (
@@ -151,8 +151,8 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                 />
 
                 {showExtraOptions && (
-                  <div className="p-2 pb-0 bg-gray-100 rounded-lg mt-4">
-                    <H3 className="pb-3 text-center">
+                  <div className="p-2 pt-4 pb-0 bg-gray-100 rounded-lg mt-4">
+                    <H3 className="pb-6 text-center">
                       {t("form.extraOptions")}
                     </H3>
                     <Checkbox

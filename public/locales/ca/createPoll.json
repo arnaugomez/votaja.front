@@ -20,6 +20,7 @@
     "descriptionPlaceholder": "Descripció de l'enquesta",
     "votesMaxLabel": "Quanta gent respondrà a l'enquesta?",
     "votesMaxPlaceholder": "Escriu un número",
+    "votesMaxError": "Mínim 2 persones",
     "emailLabel": "T'enviem l'enllaç de l'enquesta per correu?",
     "emailPlaceholder": "exemple@votaja.com",
     "submitButton": "Crea enquesta"

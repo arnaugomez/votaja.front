@@ -20,6 +20,7 @@
     "descriptionPlaceholder": "Descripción de la encuesta",
     "votesMaxLabel": "¿Cuánta gente respondrá a la encuesta?",
     "votesMaxPlaceholder": "Escribe un número",
+    "votesMaxError": "Mínimo 2 personas",
     "emailLabel": "Te mandamos el enlace de la encuesta por correo?",
     "emailPlaceholder": "ejemplo@votaja.com",
     "submitButton": "Crea encuesta"
