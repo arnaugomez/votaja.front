@@ -38,7 +38,6 @@ export default function Home() {
   }
 
   async function updatePoll(p: Poll) {
-    console.log(p);
     const err = await pollRepository.updatePoll(p);
     if (err) {
       // TODO: Handle potential error by displaying a toaster
@@ -48,9 +47,6 @@ export default function Home() {
       setShowShare(true);
     }
   }
-  useEffect(() => {
-    console.log(pollRepository.getPollBySlug("a"));
-  }, []);
 
   const goBack = () => setShowShare(false);
 

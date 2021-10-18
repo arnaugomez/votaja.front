@@ -27,7 +27,15 @@ export default function Footer() {
           VotaJa
         </p>
         <p className="pt-6 text-xs text-center leading-relaxed text-gray-600">
-          {t("projectBy")} <a>Pancripto Labs</a>.
+          {t("projectBy")}{" "}
+          <a
+            href="https://pancripto.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pancripto Labs
+          </a>
+          .
         </p>
         <div className="flex space-x-4 pt-8">
           <Button
