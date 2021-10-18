@@ -3,8 +3,10 @@ import React from "react";
 import MainLayout from "../common/view/sections/MainLayout";
 import { appWithTranslation } from "next-i18next";
 import "../styles/globals.css";
+import { useMaintenance } from "../common/view/hooks/useMaintenance";
 
 function MyApp({ Component, pageProps }) {
+  useMaintenance()
   return (
     <>
       <Head>
