@@ -1,6 +1,7 @@
 import { Poll } from "../../domain/models/Poll";
+import { Vote } from "../../domain/models/Vote";
 import { FPoll } from "./../models/FPoll";
-export const toPollDomain = (p: FPoll, id: string) =>
+export const toPollDomain = (p: FPoll, id: string, votes: Vote[]) =>
   new Poll({
     answers: p.answers,
     description: p.description,
@@ -10,6 +11,6 @@ export const toPollDomain = (p: FPoll, id: string) =>
     name: p.name,
     slug: p.slug,
     title: p.title,
-    votes: p.votes,
+    votes,
     votesMax: p.votesMax,
   });

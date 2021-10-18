@@ -6,7 +6,7 @@ import "../styles/globals.css";
 import { useMaintenance } from "../common/view/hooks/useMaintenance";
 
 function MyApp({ Component, pageProps }) {
-  useMaintenance()
+  // useMaintenance()
   return (
     <>
       <Head>

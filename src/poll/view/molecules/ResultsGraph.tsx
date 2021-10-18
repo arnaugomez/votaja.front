@@ -11,7 +11,9 @@ export interface Props {
 import { useTranslation } from "next-i18next";
 export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
   const [showBars, setShowBars] = useState(false);
-  useEffect(() => setShowBars(true), []);
+  useEffect(() => {
+    setTimeout(() => setShowBars(true), 20);
+  }, []);
 
   const myAnswers = poll.votes.find((v) => v.id === voteId)?.answers ?? [];
 
@@ -24,14 +26,14 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
         {poll.answersWithVotes.map((v) => {
           const votesPercent = Math.floor((v.votesAmount * 100) / votesNum);
           const bigBar = votesPercent > 50;
-          const votesNumLabel = `${v.votesAmount} ${t('results.votes')}`;
+          const votesNumLabel = `${v.votesAmount} ${t("results.votes")}`;
           const isMine = myAnswers.some((a) => a === v.id);
           return (
             <li
               key={v.id}
               className={moreInfo ? "pb-4 border-b space-y-3" : undefined}
             >
-              <div className="flex items-stretch space-x-2">
+              <div className="flex items-center space-x-2">
                 <div
                   className={
                     "w-28 flex-none truncate text-sm " +
@@ -43,12 +45,12 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
                 <div className="relative flex-1 flex items-center space-x-2">
                   <div
                     className={
-                      "rounded text-xs text-white pr-2 flex items-center justify-end h-full overflow-hidden transition-all duration-1000 ease-out " +
+                      "rounded text-xs text-white pr-2 flex items-center justify-end h-6 overflow-hidden transition-all duration-1000 ease-out " +
                       (isMine ? "bg-primary-600" : "bg-primary-500")
                     }
                     style={{ width: `${showBars ? votesPercent : 0}%` }}
                   >
-                    {bigBar && votesNumLabel}
+                    <div>{bigBar && votesNumLabel}</div>
                   </div>
                   <div className="text-xs text-primary-500">
                     {!bigBar && votesNumLabel}
@@ -60,17 +62,14 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
                   <div className="relative block flex-none h-4 w-4">
                     <UserAddIcon />
                   </div>
-                  <ul className="flex-1 text-xs flex flex-wrap items-center">
+                  <p className="flex-1 text-xs leading-relaxed items-center break-all">
                     {poll.votes
                       .filter((vote) =>
                         vote.answers.some((answer) => answer === v.id)
                       )
-                      .map((vote) => (
-                        <li className="pr-1 pb-1" key={vote.id}>
-                          {vote.name},{" "}
-                        </li>
-                      ))}
-                  </ul>
+                      .map((vote) => vote.name)
+                      .join(", ")}
+                  </p>
                 </div>
               )}
             </li>

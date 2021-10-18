@@ -9,22 +9,23 @@ import SharePollUrl from "../molecules/SharePollUrl";
 import SimplePollStats from "../molecules/SimplePollStats";
 import BackIcon from "../../../../public/assets/icons/back.svg";
 import { useTranslation } from "next-i18next";
+import { Vote } from "../../domain/models/Vote";
 
 interface Props {
   poll: Poll;
-  voteId: string;
-  hasVoted: boolean;
+  vote: Vote;
   onGoToVoteForm: () => void;
 }
 
 export default function PollResults({
   poll,
-  voteId,
-  hasVoted,
+  vote,
   onGoToVoteForm,
 }: Props) {
   useConfetti();
   const [moreInfo, setMoreInfo] = useState(false);
+  const voteId = vote?.id
+  const hasVoted = !!vote
 
   const { t } = useTranslation("votePoll");
   return (

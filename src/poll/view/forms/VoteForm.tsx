@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import React, { useMemo } from "react";
 import * as yup from "yup";
 import SpinIcon from "../../../../public/assets/icons/spin.svg";
@@ -20,52 +20,38 @@ interface FormValues {
 
 interface Props {
   poll: Poll;
-  voteId: string;
-  onVote: (newPoll: Poll) => Promise<void>;
+  vote: Vote;
+  onVote: (newVote: Vote) => Promise<void>;
   onShowResults: () => void;
 }
 
-export default function VoteForm({
-  poll,
-  onVote,
-  onShowResults,
-  voteId,
-}: Props) {
+export default function VoteForm({ poll, onVote, onShowResults, vote }: Props) {
   const pollOptions = useMemo(() => poll.answers.map(answerToOption), [poll]);
-  const currentVote = useMemo(
-    () => poll.votes.find((v) => v.id === voteId),
-    [poll, voteId]
-  );
-  const initialValues: FormValues = useMemo(
-    () => ({
-      name: currentVote ? currentVote.name : "",
-      answers: currentVote
-        ? currentVote.answers.map((a) => pollOptions.find((o) => o.value === a))
-        : [],
-    }),
-    [currentVote]
-  );
 
-  function handleSubmit(values: FormValues) {
-    const pollObj = poll.toObject();
-    const newVote: Vote = {
-      id: voteId,
+  function handleSubmit(
+    values: FormValues,
+    helpers: FormikHelpers<FormValues>
+  ) {
+    onVote({
+      id: vote?.id,
       answers: values.answers.map((a) => a.value),
       name: values.name,
-    };
-
-    if (currentVote) {
-      pollObj.votes = pollObj.votes.map((v) => (v.id === voteId ? newVote : v));
-    } else {
-      pollObj.votes.push(newVote);
-    }
-
-    onVote(new Poll(pollObj));
+    }).catch(() => helpers.setSubmitting(false));
   }
 
   const Select = poll.isMultipleChoice ? CheckboxSelect : RadioSelect;
 
   const { t } = useTranslation("votePoll");
+
+  const initialValues: FormValues = useMemo(
+    () => ({
+      name: vote?.name ?? "",
+      answers: vote
+        ? vote.answers.map((a) => pollOptions.find((o) => o.value === a))
+        : [],
+    }),
+    [vote]
+  );
 
   const schema = yup.object().shape({
     name: yup.string().required(t("form.nameError")),
