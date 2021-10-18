@@ -22,8 +22,8 @@ export default function MaintenancePage() {
   const { t } = useTranslation("common");
   return (
     <MainLayout>
+      <Hero />
       <MaxWidth>
-        <Hero />
         <div className="flex flex-col space-y-2 items-center text-center text-sm text-gray-700 pb-20">
           <div className="animate-bounce">
             <CogIcon />
