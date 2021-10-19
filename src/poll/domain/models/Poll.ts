@@ -76,6 +76,10 @@ export class Poll implements IPoll {
       (a, b) => b.votesAmount - a.votesAmount
     )[0];
   }
+
+  getVoteById(id: string) {
+    return this.votes.find(v => v.id === id)
+  }
 }
 
 export interface IPoll extends TitleDescription {
