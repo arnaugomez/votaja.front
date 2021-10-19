@@ -25,7 +25,7 @@ export default function VoteHero({
         {t("poll")}{" "}
         {name ? `${t("hero.createdBy")} ${name}` : t("hero.createdWith")}
       </p>
-      <h1 className="pt-6 pb-2 font-medium leading-none text-3xl">{title}</h1>
+      <h1 className="pt-6 pb-2 font-medium leading-9 text-3xl">{title}</h1>
       <Pretitle className="pb-4">{voters}</Pretitle>
       {showDescription && description && (
         <p className="text-sm text-gray-500">{description}</p>

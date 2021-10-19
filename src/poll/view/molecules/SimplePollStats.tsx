@@ -16,7 +16,7 @@ function SimplePollStatsItem({
   value: string;
 }) {
   return (
-    <div className="flex-1 text-center">
+    <div className="flex-1 w-1/2 flex flex-col items-stretch text-center">
       <h3 className="text-xxs font-medium uppercase text-gray-600">{title}</h3>
       <p className="text-lg font-medium truncate">{value}</p>
     </div>
