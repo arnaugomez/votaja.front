@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../../common/view/atoms/Button";
-import Description from "../../../common/view/atoms/Description";
-import CopyIcon from "../../../../public/assets/icons/copy.svg";
+import Button from "../../../common/view/components/atoms/Button";
+import Description from "../../../common/view/components/atoms/Description";
+import CopyIcon from "@icons/copy";
 import { Poll } from "../../domain/models/Poll";
 import { useTranslation } from "next-i18next";
 

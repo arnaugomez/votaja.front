@@ -1,7 +1,7 @@
 import React from "react";
-import H1 from "../../../common/view/atoms/H1";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
-import Subtitle from "../../../common/view/atoms/Subtitle";
+import H1 from "../../../common/view/components/atoms/H1";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
+import Subtitle from "../../../common/view/components/atoms/Subtitle";
 import HeroImg from "../atoms/HeroImg";
 import { useTranslation } from "next-i18next";
 

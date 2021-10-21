@@ -1,5 +1,5 @@
 import React from 'react'
-import SImg from '../../../common/view/atoms/SImg'
+import SImg from '../../../common/view/components/atoms/SImg'
 
 export default function HeroImg() {
   return (

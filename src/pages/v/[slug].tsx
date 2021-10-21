@@ -6,7 +6,7 @@ import { IPoll, Poll } from "../../poll/domain/models/Poll";
 import VoteSection from "../../poll/view/sections/VoteSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import MainLayout from "../../common/view/sections/MainLayout";
+import MainLayout from "../../common/view/components/sections/MainLayout";
 
 interface Props {
   poll: IPoll;

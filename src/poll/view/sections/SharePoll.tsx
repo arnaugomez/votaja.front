@@ -1,13 +1,13 @@
 import React from "react";
-import Button from "../../../common/view/atoms/Button";
-import H2 from "../../../common/view/atoms/H2";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import Button from "../../../common/view/components/atoms/Button";
+import H2 from "../../../common/view/components/atoms/H2";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { useConfetti } from "../../../common/view/hooks/useConfetti";
 import { Poll } from "../../domain/models/Poll";
 import CelebrationImg from "../atoms/CelebrationImg";
 import SharePollEmbed from "../molecules/SharePollEmbed";
 import SharePollUrl from "../molecules/SharePollUrl";
-import BackIcon from "../../../../public/assets/icons/back.svg";
+import BackIcon from "@icons/back";
 import { useTranslation } from "next-i18next";
 
 interface Props {

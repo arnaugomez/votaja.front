@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import Button from "../../../common/view/atoms/Button";
-import Input from "../../../common/view/atoms/Input";
+import Button from "../../../common/view/components/atoms/Button";
+import Input from "../../../common/view/components/atoms/Input";
 import { Option } from "../../../common/view/view-models/Option";
-import AddIcon from "../../../../public/assets/icons/add.svg";
-import BinIcon from "../../../../public/assets/icons/bin.svg";
+import AddIcon from "@icons/add";
+import BinIcon from "@icons/bin";
 
 type Answers = Option<number>[];
 

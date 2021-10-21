@@ -5,5 +5,19 @@
   "sharePollUrl": {
     "description": "Comparteix-la per Whatsapp i a les xarxes:",
     "copyLink": "Copia l'enllaç"
+  },
+  "supportModal": {
+    "title": "Proposa millora",
+    "emailLabel": "Email",
+    "emailPlaceholder": "exemple@votaja.com",
+    "emailError": "Escriu un email vàlid.",
+    "nameLabel": "Nom",
+    "namePlaceholder": "El teu nom",
+    "descriptionLabel": "La teva proposta de millora",
+    "descriptionPlaceholder": "Proposa una millora o informa'ns d'un error.",
+    "descriptionError": "Camp obligatori.",
+    "submit": "Envia",
+    "orRather": "o bé",
+    "openIssue": "Crea issue a GitHub"
   }
 }

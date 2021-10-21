@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import SImg from "../../../common/view/atoms/SImg";
+import SImg from "../../../common/view/components/atoms/SImg";
 import Mesh1 from "/public/assets/img/party/party-1.png";
 import Mesh2 from "/public/assets/img/party/party-2.png";
 import Mesh3 from "/public/assets/img/party/party-3.png";

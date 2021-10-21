@@ -1,12 +1,12 @@
 import { Formik, FormikHelpers } from "formik";
 import React, { useMemo } from "react";
 import * as yup from "yup";
-import SpinIcon from "../../../../public/assets/icons/spin.svg";
-import Button from "../../../common/view/atoms/Button";
-import Checkbox from "../../../common/view/atoms/Checkbox";
-import Input from "../../../common/view/atoms/Input";
-import CheckboxSelect from "../../../common/view/molecules/CheckboxSelect";
-import RadioSelect from "../../../common/view/molecules/RadioSelect";
+import SpinIcon from "@icons/spin";
+import Button from "../../../common/view/components/atoms/Button";
+import Checkbox from "../../../common/view/components/atoms/Checkbox";
+import Input from "../../../common/view/components/atoms/Input";
+import CheckboxSelect from "../../../common/view/components/molecules/CheckboxSelect";
+import RadioSelect from "../../../common/view/components/molecules/RadioSelect";
 import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import { Vote } from "../../domain/models/Vote";

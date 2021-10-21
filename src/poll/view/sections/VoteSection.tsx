@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MaxWidth from "../../../common/view/atoms/MaxWidth";
+import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
 import { pollRepository } from "../../data/repositories/PollRepository";
 import { Poll } from "../../domain/models/Poll";
 import { Vote } from "../../domain/models/Vote";

@@ -1,10 +1,10 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import MaxWidth from "../common/view/atoms/MaxWidth";
-import MainLayout from "../common/view/sections/MainLayout";
+import MaxWidth from "../common/view/components/atoms/MaxWidth";
+import MainLayout from "../common/view/components/sections/MainLayout";
 import Hero from "../landing/view/sections/Hero";
-import CogIcon from "../../public/assets/icons/cog.svg";
+import CogIcon from "@icons/cog";
 
 export async function getStaticProps({ locale }) {
   return {

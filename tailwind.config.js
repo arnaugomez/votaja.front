@@ -7,7 +7,10 @@ module.exports = {
         sans: ["Inter", "sans-serif"],
       },
       fontSize: {
-        xxs: "0.6rem"
+        xxs: "0.6rem",
+      },
+      minHeight: {
+        20: "5rem",
       },
       colors: {
         primary: {

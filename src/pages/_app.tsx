@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { appWithTranslation } from "next-i18next";
 import "../styles/globals.css";
+import { ModalProvider } from "src/ui/view/store/modalStore";
 // import { useMaintenance } from "../common/view/hooks/useMaintenance";
 
 function MyApp({ Component, pageProps }) {
@@ -34,7 +35,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#2b5797" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <Component {...pageProps} />
+      <ModalProvider>
+        <Component {...pageProps} />
+      </ModalProvider>
     </>
   );
 }

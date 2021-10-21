@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "../../../common/view/atoms/Button";
-import H2 from "../../../common/view/atoms/H2";
+import Button from "../../../common/view/components/atoms/Button";
+import H2 from "../../../common/view/components/atoms/H2";
 import { useConfetti } from "../../../common/view/hooks/useConfetti";
 import { Poll } from "../../domain/models/Poll";
 import CelebrationImg from "../atoms/CelebrationImg";
 import ResultsGraph from "../molecules/ResultsGraph";
 import SharePollUrl from "../molecules/SharePollUrl";
 import SimplePollStats from "../molecules/SimplePollStats";
-import BackIcon from "../../../../public/assets/icons/back.svg";
+import BackIcon from "@icons/back";
 import { useTranslation } from "next-i18next";
 import { Vote } from "../../domain/models/Vote";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Poll } from "../../domain/models/Poll";
-import UserAddIcon from "../../../../public/assets/icons/user-add.svg";
+import UsersIcon from "@icons/users";
 
 export interface Props {
   poll: Poll;
@@ -60,7 +60,7 @@ export default function ResultsGraph({ poll, voteId, moreInfo }: Props) {
               {moreInfo && !!v.votesAmount && (
                 <div className="flex text-gray-600 space-x-2 pl-2">
                   <div className="relative block flex-none h-4 w-4">
-                    <UserAddIcon />
+                    <UsersIcon />
                   </div>
                   <p className="flex-1 text-xs leading-relaxed items-center break-all">
                     {poll.votes

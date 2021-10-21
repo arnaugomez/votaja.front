@@ -7,7 +7,7 @@ import SharePoll from "../poll/view/sections/SharePoll";
 import Head from "next/head";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-import MainLayout from "../common/view/sections/MainLayout";
+import MainLayout from "../common/view/components/sections/MainLayout";
 
 export async function getStaticProps({ locale }) {
   return {
