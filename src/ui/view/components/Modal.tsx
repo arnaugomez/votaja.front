@@ -23,15 +23,15 @@ export default function Modal() {
     }
   }, [modal]);
 
-  if(!modal) {
-    return null
+  if (!modal) {
+    return null;
   }
 
   return (
-    <section className="fixed z-20 inset-0 transition-all flex items-center justify-center py-8 px-2">
+    <section className="fixed z-20 inset-0 flex items-center justify-center py-8 px-2">
       <button
         className={
-          "absolute inset-0 w-full h-full appearance-none bg-gray-900 cursor-default " +
+          "absolute inset-0 w-full h-full appearance-none transition-opacity duration-500 bg-gray-900 cursor-default " +
           opacity
         }
         aria-label="Close modal"
