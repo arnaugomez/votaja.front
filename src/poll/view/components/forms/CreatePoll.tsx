@@ -3,16 +3,16 @@ import { Formik, FormikHelpers } from "formik";
 import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import * as yup from "yup";
-import BadgeTextSelector from "../../../common/view/components/atoms/BadgeTextSelector";
-import Button from "../../../common/view/components/atoms/Button";
-import Checkbox from "../../../common/view/components/atoms/Checkbox";
-import H3 from "../../../common/view/components/atoms/H3";
-import Input from "../../../common/view/components/atoms/Input";
-import MaxWidth from "../../../common/view/components/atoms/MaxWidth";
-import { Option } from "../../../common/view/view-models/Option";
-import { Poll } from "../../domain/models/Poll";
+import BadgeTextSelector from "../../../../common/view/components/atoms/BadgeTextSelector";
+import Button from "../../../../common/view/components/atoms/Button";
+import Checkbox from "../../../../common/view/components/atoms/Checkbox";
+import H3 from "../../../../common/view/components/atoms/H3";
+import Input from "../../../../common/view/components/atoms/Input";
+import MaxWidth from "../../../../common/view/components/atoms/MaxWidth";
+import { Option } from "../../../../common/view/view-models/Option";
+import { Poll } from "../../../domain/models/Poll";
 import AnswersCreator from "../molecules/AnswersCreator";
-import { answerToOption } from "../presenters/answerToOption";
+import { answerToOption } from "../../presenters/answerToOption";
 
 export interface FormValues {
   title: string;

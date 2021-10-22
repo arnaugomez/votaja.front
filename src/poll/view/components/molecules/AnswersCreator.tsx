@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import Button from "../../../common/view/components/atoms/Button";
-import Input from "../../../common/view/components/atoms/Input";
-import { Option } from "../../../common/view/view-models/Option";
+import Button from "../../../../common/view/components/atoms/Button";
+import Input from "../../../../common/view/components/atoms/Input";
+import { Option } from "../../../../common/view/view-models/Option";
 import AddIcon from "@icons/add";
 import BinIcon from "@icons/bin";
 

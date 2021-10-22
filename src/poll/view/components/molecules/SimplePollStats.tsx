@@ -1,6 +1,6 @@
 import React from "react";
-import { Poll } from "../../domain/models/Poll";
-import getSimiarVotesPercent from "../../domain/use-cases/getSimilarVotesPercent";
+import { Poll } from "../../../domain/models/Poll";
+import getSimiarVotesPercent from "../../../domain/use-cases/getSimilarVotesPercent";
 import { useTranslation } from "next-i18next";
 
 export interface Props {

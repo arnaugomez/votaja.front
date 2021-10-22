@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../../common/view/components/atoms/Button";
-import Description from "../../../common/view/components/atoms/Description";
+import Button from "../../../../common/view/components/atoms/Button";
+import Description from "../../../../common/view/components/atoms/Description";
 import CopyIcon from "@icons/copy";
-import { Poll } from "../../domain/models/Poll";
+import { Poll } from "../../../domain/models/Poll";
 import { useTranslation } from "next-i18next";
 
 interface Props {

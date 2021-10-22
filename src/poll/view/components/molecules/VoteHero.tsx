@@ -1,7 +1,7 @@
 import React from "react";
-import Pretitle from "../../../common/view/components/atoms/Pretitle";
-import HeroImg from "../../../landing/view/atoms/HeroImg";
-import { Poll } from "../../domain/models/Poll";
+import Pretitle from "../../../../common/view/components/atoms/Pretitle";
+import HeroImg from "../../../../landing/view/atoms/HeroImg";
+import { Poll } from "../../../domain/models/Poll";
 import { useTranslation } from "next-i18next";
 
 interface Props {

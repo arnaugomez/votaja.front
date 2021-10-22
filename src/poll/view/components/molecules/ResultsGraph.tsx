@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Poll } from "../../domain/models/Poll";
+import { Poll } from "../../../domain/models/Poll";
 import UsersIcon from "@icons/users";
 
 export interface Props {

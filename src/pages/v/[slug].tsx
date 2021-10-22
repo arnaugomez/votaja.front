@@ -3,10 +3,11 @@ import Head from "next/head";
 import React from "react";
 import { pollRepository } from "../../poll/data/repositories/PollRepository";
 import { IPoll, Poll } from "../../poll/domain/models/Poll";
-import VoteSection from "../../poll/view/sections/VoteSection";
+import VoteSection from "../../poll/view/components/sections/VoteSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import MainLayout from "../../common/view/components/sections/MainLayout";
+import { VoteProvider } from "src/poll/view/store/voteStore";
 
 interface Props {
   poll: IPoll;
@@ -41,16 +42,18 @@ export default function VotePage({ poll }: Props) {
   const p = new Poll(poll);
   const { t: seoT } = useTranslation("seo");
   return (
-    <MainLayout>
-      <Head>
-        <title>
-          {seoT("poll")}: {poll.title} | {seoT("pollCreator")} VOTAJA
-        </title>
-        <meta name="description" content={seoT("description")} />
-        <meta name="keywords" content={seoT("keywords")} />
-        <meta name="author" content="Arnau Gómez" />
-      </Head>
-      <VoteSection poll={p} />
-    </MainLayout>
+    <VoteProvider>
+      <MainLayout>
+        <Head>
+          <title>
+            {seoT("poll")}: {poll.title} | {seoT("pollCreator")} VOTAJA
+          </title>
+          <meta name="description" content={seoT("description")} />
+          <meta name="keywords" content={seoT("keywords")} />
+          <meta name="author" content="Arnau Gómez" />
+        </Head>
+        <VoteSection poll={p} />
+      </MainLayout>
+    </VoteProvider>
   );
 }

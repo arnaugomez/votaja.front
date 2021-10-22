@@ -2,15 +2,15 @@ import { Formik, FormikHelpers } from "formik";
 import { useTranslation } from "next-i18next";
 import React, { useMemo } from "react";
 import * as yup from "yup";
-import Button from "../../../common/view/components/atoms/Button";
-import Checkbox from "../../../common/view/components/atoms/Checkbox";
-import Input from "../../../common/view/components/atoms/Input";
-import CheckboxSelect from "../../../common/view/components/molecules/CheckboxSelect";
-import RadioSelect from "../../../common/view/components/molecules/RadioSelect";
-import { Option } from "../../../common/view/view-models/Option";
-import { Poll } from "../../domain/models/Poll";
-import { Vote } from "../../domain/models/Vote";
-import { answerToOption } from "../presenters/answerToOption";
+import Button from "../../../../common/view/components/atoms/Button";
+import Checkbox from "../../../../common/view/components/atoms/Checkbox";
+import Input from "../../../../common/view/components/atoms/Input";
+import CheckboxSelect from "../../../../common/view/components/molecules/CheckboxSelect";
+import RadioSelect from "../../../../common/view/components/molecules/RadioSelect";
+import { Option } from "../../../../common/view/view-models/Option";
+import { Poll } from "../../../domain/models/Poll";
+import { Vote } from "../../../domain/models/Vote";
+import { answerToOption } from "../../presenters/answerToOption";
 
 interface FormValues {
   name: string;
