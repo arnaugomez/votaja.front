@@ -43,7 +43,7 @@ export default function SharePollEmbed({ poll }: Props) {
           {urlCopied ? (
             <div>{t("copied")}</div>
           ) : (
-            <div>{t("share.copyEmbed")}</div>
+            <div className="whitespace-nowrap">{t("share.copyEmbed")}</div>
           )}
         </div>
       </Button>

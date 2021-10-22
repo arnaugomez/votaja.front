@@ -1,7 +1,7 @@
 import { Formik, FormikHelpers } from "formik";
+import { useTranslation } from "next-i18next";
 import React, { useMemo } from "react";
 import * as yup from "yup";
-import SpinIcon from "@icons/spin";
 import Button from "../../../common/view/components/atoms/Button";
 import Checkbox from "../../../common/view/components/atoms/Checkbox";
 import Input from "../../../common/view/components/atoms/Input";
@@ -11,7 +11,6 @@ import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import { Vote } from "../../domain/models/Vote";
 import { answerToOption } from "../presenters/answerToOption";
-import { useTranslation } from "next-i18next";
 
 interface FormValues {
   name: string;
@@ -113,14 +112,9 @@ export default function VoteForm({ poll, onVote, onShowResults, vote }: Props) {
               <Button
                 className="w-36 flex justify-center items-center"
                 isSubmit
+                isLoading={isSubmitting}
               >
-                {isSubmitting ? (
-                  <div className="animate-spin">
-                    <SpinIcon />
-                  </div>
-                ) : (
-                  t("vote")
-                )}
+                {t("vote")}
               </Button>
             </div>
           </form>

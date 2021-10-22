@@ -1,3 +1,4 @@
+import SpinIcon from "@icons/spin";
 import React from "react";
 import { CCnProps } from "../../view-models/CProps";
 
@@ -7,6 +8,7 @@ interface Props extends CCnProps {
   color?: "primary" | "success" | "warning" | "error" | "boring";
   variant?: "primary" | "subtle";
   isSubmit?: boolean;
+  isLoading?: boolean;
 }
 
 type ColorMap = Record<Props["color"], string>;
@@ -26,7 +28,8 @@ const colorMapSubtle: ColorMap = {
   warning:
     "bg-warning-100 font-medium text-warning ring-1 hover:ring-2 ring-warning-300",
   error: "bg-red-100 font-medium text-red-700 ring-1 hover:ring-2 ring-red-300",
-  boring: "bg-gray-100 font-medium text-gray-700 ring-1 hover:ring-2 ring-gray-300",
+  boring:
+    "bg-gray-100 font-medium text-gray-700 ring-1 hover:ring-2 ring-gray-300",
 };
 
 const variantMap: Record<Props["variant"], ColorMap> = {
@@ -40,6 +43,8 @@ export default function Button({
   color = "primary",
   className,
   isSubmit,
+  isLoading = false,
+  children,
   ...props
 }: Props) {
   const fwClass = fullWidth ? "block w-full grid place-items-center " : "";
@@ -54,6 +59,14 @@ export default function Button({
       }
       type={isSubmit ? "submit" : "button"}
       {...props}
-    />
+    >
+      {isLoading ? (
+        <div className="animate-spin">
+          <SpinIcon />
+        </div>
+      ) : (
+        children
+      )}
+    </button>
   );
 }

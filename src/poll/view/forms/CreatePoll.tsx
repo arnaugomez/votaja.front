@@ -1,8 +1,8 @@
+import CogIcon from "@icons/cog";
 import { Formik, FormikHelpers } from "formik";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import * as yup from "yup";
-import CogIcon from "@icons/cog";
-import SpinIcon from "@icons/spin";
 import BadgeTextSelector from "../../../common/view/components/atoms/BadgeTextSelector";
 import Button from "../../../common/view/components/atoms/Button";
 import Checkbox from "../../../common/view/components/atoms/Checkbox";
@@ -13,7 +13,6 @@ import { Option } from "../../../common/view/view-models/Option";
 import { Poll } from "../../domain/models/Poll";
 import AnswersCreator from "../molecules/AnswersCreator";
 import { answerToOption } from "../presenters/answerToOption";
-import { useTranslation } from "next-i18next";
 
 export interface FormValues {
   title: string;
@@ -94,7 +93,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
       }),
     isMultipleChoice: yup.bool().required(),
     email: yup.string().email(t("emailError")).notRequired(),
-    votesMax: yup.number().notRequired().min(2, t('form.votesMaxError')),
+    votesMax: yup.number().notRequired().min(2, t("form.votesMaxError")),
   });
 
   return (
@@ -216,14 +215,9 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                   <Button
                     className="w-36 flex justify-center items-center"
                     isSubmit
+                    isLoading={isSubmitting}
                   >
-                    {isSubmitting ? (
-                      <div className="animate-spin">
-                        <SpinIcon />
-                      </div>
-                    ) : (
-                      t("form.submitButton")
-                    )}
+                    {t("form.submitButton")}
                   </Button>
                 </div>
               </form>

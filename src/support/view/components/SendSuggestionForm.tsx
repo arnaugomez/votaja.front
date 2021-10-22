@@ -87,14 +87,8 @@ export default function SuggestionForm({ onSubmit }: Props) {
               }
             />
             <div className="pt-4 flex justify-end">
-              <Button className="w-36" isSubmit>
-                {isSubmitting ? (
-                  <div className="animate-spin w-full flex justify-center">
-                    <SpinIcon />
-                  </div>
-                ) : (
-                  "Envia"
-                )}
+              <Button className="w-36" isSubmit isLoading={isSubmitting}>
+                Envia
               </Button>
             </div>
           </form>
