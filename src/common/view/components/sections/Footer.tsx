@@ -32,7 +32,7 @@ export default function Footer() {
         <p className="pt-6 text-xs text-center leading-relaxed text-gray-600">
           {t("projectBy")}{" "}
           <a
-            href="https://pancripto.com/"
+            href="https://pancripto.arnaugomez.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
