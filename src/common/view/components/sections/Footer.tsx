@@ -3,10 +3,17 @@ import Button from "../atoms/Button";
 import MaxWidth from "../atoms/MaxWidth";
 import LinkIcon from "@icons/link";
 import { useTranslation } from "next-i18next";
-import { useSupportStore } from "src/support/view/store/supportStore";
+import { withDeps } from "../../hocs/withDeps";
+import { useSupportStore } from "src/support/supportModule";
+import { ISupportStore } from "src/support/domain/interfaces/ISupportStore";
 
-export default function Footer() {
-  const {openSuggestionModal} = useSupportStore()
+interface Props {
+  useSupportStore: () => ISupportStore;
+}
+
+function Footer({ useSupportStore }: Props) {
+  const { openSuggestionModal } = useSupportStore();
+  // const openSuggestionModal = () => true
 
   const [urlCopied, setUrlCopied] = useState(false);
   useEffect(() => {
@@ -73,3 +80,6 @@ export default function Footer() {
     </section>
   );
 }
+
+
+export default withDeps(Footer)({useSupportStore});

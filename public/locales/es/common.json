@@ -1,4 +1,5 @@
 {
+  "heroImgAlt": "Crea tu enquesta con Votaja",
   "maintenance": "Estamos de mantenimiento. Disculpad las molestias.",
   "copied": "Copiado",
   "localeUrl": "votaja.com/es",
@@ -19,5 +20,6 @@
     "submit": "Envia",
     "orRather": "o bien",
     "openIssue": "Abre issue en GitHub"
-  }
+  },
+  "celebrationImgAlt": "Felicidades, has creado o participado en una encuesta"
 }

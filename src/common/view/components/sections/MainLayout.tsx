@@ -1,11 +1,17 @@
 import React from "react";
-import { useModalStore } from "../../../../ui/view/store/modalStore";
 import { CProps } from "../../view-models/CProps";
 import Footer from "./Footer";
 import dynamic from "next/dynamic";
+import { withDeps } from "../../hocs/withDeps";
+import { useModalStore } from "src/ui/uiModule";
+import { IModalStore } from "src/ui/domain/interfaces/IModalStore";
 const Modal = dynamic(() => import("../../../../ui/view/components/Modal"));
 
-export default function MainLayout({ children }: CProps) {
+interface Props extends CProps {
+  useModalStore(): IModalStore;
+}
+
+function MainLayout({ children, useModalStore }: Props) {
   const { modal } = useModalStore();
   return (
     <>
@@ -20,3 +26,5 @@ export default function MainLayout({ children }: CProps) {
     </>
   );
 }
+
+export default withDeps(MainLayout)({ useModalStore });

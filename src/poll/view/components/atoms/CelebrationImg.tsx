@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React, { useMemo } from "react";
 import SImg from "../../../../common/view/components/atoms/SImg";
 import Mesh1 from "/public/assets/img/party/party-1.png";
@@ -15,9 +16,10 @@ const fallbackMap: Record<1 | 2 | 3 | 4, StaticImageData> = {
 export default function CelebrationImg() {
   const src = useMemo(() => fallbackMap[Math.floor(Math.random() * 4) + 1], []);
 
+  const { t } = useTranslation("common");
   return (
     <div className="flex justify-center pb-2">
-      <SImg src={src} height={60} width={60} />
+      <SImg src={src} alt={t("celebrationImgAlt")} height={60} width={60} />
     </div>
   );
 }

@@ -10,7 +10,7 @@ import React, {
 import { Vote } from "src/poll/domain/models/Vote";
 import { IVoteStore } from "src/poll/domain/interfaces/IVoteStore";
 import { Poll } from "src/poll/domain/models/Poll";
-import { pollRepository } from "src/poll/data/repositories/PollRepository";
+import { pollRepository } from "src/poll/pollModule";
 
 const VoteContext = createContext<Vote>(null);
 const SetVoteContext = createContext<Dispatch<SetStateAction<Vote>>>(null);
@@ -28,7 +28,7 @@ export function VoteProvider({ children }: CProps) {
 
 const LS_VOTE_OF_POLL_PREFIX = "voteOfPoll_";
 
-export function useVoteStore(): IVoteStore {
+export function useVoteStoreDep(): IVoteStore {
   const vote = useContext(VoteContext);
   const setVote = useContext(SetVoteContext);
 
@@ -42,7 +42,6 @@ export function useVoteStore(): IVoteStore {
       }
 
       setVote(vote);
-      console.log({ vote, err });
 
       try {
         localStorage.setItem(LS_VOTE_OF_POLL_PREFIX + p.id, vote.id);

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import React, { useState } from "react";
+import { pollRepository } from "src/poll/pollModule";
+import MainLayout from "../common/view/components/sections/MainLayout";
 import Hero from "../landing/view/sections/Hero";
-import { pollRepository } from "../poll/data/repositories/PollRepository";
 import { Poll } from "../poll/domain/models/Poll";
 import CreatePoll from "../poll/view/components/forms/CreatePoll";
 import SharePoll from "../poll/view/components/sections/SharePoll";
-import Head from "next/head";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
-import MainLayout from "../common/view/components/sections/MainLayout";
 
 export async function getStaticProps({ locale }) {
   return {

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { withDeps } from "src/common/view/hocs/withDeps";
+import { IPollRepository } from "src/poll/domain/interfaces/IPollRepository";
+import { IVoteStore } from "src/poll/domain/interfaces/IVoteStore";
+import { pollRepository, useVoteStore } from "src/poll/pollModule";
 import MaxWidth from "../../../../common/view/components/atoms/MaxWidth";
-import { pollRepository } from "../../../data/repositories/PollRepository";
 import { Poll } from "../../../domain/models/Poll";
 import { Vote } from "../../../domain/models/Vote";
-import { useVoteStore } from "../../store/voteStore";
 import VoteForm from "../forms/VoteForm";
 import VoteHero from "../molecules/VoteHero";
 import PollResults from "./PollResults";
 
 interface Props {
   poll: Poll;
+  pollRepository: IPollRepository;
+  useVoteStore(): IVoteStore;
 }
 
-export default function VoteSection({ poll: p }: Props) {
+function VoteSection({ poll: p, useVoteStore, pollRepository }: Props) {
   const { vote, createVote, updateVote, getVoteFromLocalStorage } =
     useVoteStore();
   const [poll, setPoll] = useState<Poll>(p);
@@ -67,3 +71,4 @@ export default function VoteSection({ poll: p }: Props) {
     </section>
   );
 }
+export default withDeps(VoteSection)({ useVoteStore, pollRepository });

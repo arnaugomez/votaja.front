@@ -21,7 +21,7 @@ import { FPoll } from "./../models/FPoll";
 import { toFPoll } from "./../presenters/toFPoll";
 import { toPollDomain } from "./../transformers/toPollDomain";
 
-class PollRepository implements IPollRepository {
+export class PollRepository implements IPollRepository {
   async createVote(pollId: string, vote: Vote) {
     const fVote = toFVote(vote, pollId);
 
@@ -123,5 +123,3 @@ class PollRepository implements IPollRepository {
     return null;
   }
 }
-
-export const pollRepository: IPollRepository = new PollRepository();

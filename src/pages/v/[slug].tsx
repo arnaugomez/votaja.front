@@ -1,13 +1,13 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import React from "react";
-import { pollRepository } from "../../poll/data/repositories/PollRepository";
 import { IPoll, Poll } from "../../poll/domain/models/Poll";
 import VoteSection from "../../poll/view/components/sections/VoteSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import MainLayout from "../../common/view/components/sections/MainLayout";
 import { VoteProvider } from "src/poll/view/store/voteStore";
+import { pollRepository } from "src/poll/pollModule";
 
 interface Props {
   poll: IPoll;

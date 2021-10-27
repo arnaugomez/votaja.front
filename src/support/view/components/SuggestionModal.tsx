@@ -2,12 +2,20 @@ import GithubIcon from "@icons/github";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Button from "src/common/view/components/atoms/Button";
-import { supportRepository } from "src/support/data/repositories/SupportRepository";
+import { withDeps } from "src/common/view/hocs/withDeps";
+import { ISupportRepository } from "src/support/domain/interfaces/ISupportRepository";
 import { Suggestion } from "src/support/domain/models/Suggestion";
-import { useModalStore } from "src/ui/view/store/modalStore";
+import { supportRepository } from "src/support/supportModule";
+import { IModalStore } from "src/ui/domain/interfaces/IModalStore";
+import { useModalStore } from "src/ui/uiModule";
 import SuggestionForm from "./SendSuggestionForm";
 
-export default function SendSuggestionModal() {
+interface Props {
+  supportRepository: ISupportRepository;
+  useModalStore: () => IModalStore;
+}
+
+function SendSuggestionModal({ supportRepository, useModalStore }: Props) {
   const { clearModal } = useModalStore();
   const { t } = useTranslation("common");
 
@@ -42,3 +50,6 @@ export default function SendSuggestionModal() {
     </>
   );
 }
+
+const module = { supportRepository, useModalStore };
+export default withDeps(SendSuggestionModal)(module);

@@ -1,11 +1,11 @@
 import { ISupportStore } from "../../domain/interfaces/ISupportStore";
-import { useModalStore } from "src/ui/view/store/modalStore";
 import { useCallback } from "react";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
+import { useModalStore } from "src/ui/uiModule";
 const SuggestionModal = dynamic(() => import("../components/SuggestionModal"));
 
-export function useSupportStore(): ISupportStore {
+export function useSupportStoreDep(): ISupportStore {
   const { t } = useTranslation("common");
   const { setModal } = useModalStore();
 

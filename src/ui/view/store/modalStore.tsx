@@ -25,7 +25,7 @@ export function ModalProvider({ children }: CProps) {
   );
 }
 
-export function useModalStore(): IModalStore {
+export function useModalStoreDep(): IModalStore {
   const modal = useContext(ModalContext);
   const setModal = useContext(SetModalContext);
   const clearModal = useCallback(() => setModal(null), [setModal]);
