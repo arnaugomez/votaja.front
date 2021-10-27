@@ -9,6 +9,7 @@ export default function HeroImg() {
       <SImg
         suppressHydrationWarning={true}
         priority={true}
+        placeholder="blur"
         alt={t("heroImgAlt")}
         layout="fill"
         objectFit="cover"
