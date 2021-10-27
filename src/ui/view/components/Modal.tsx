@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { withDeps } from "src/common/view/hocs/withDeps";
+import { useModalStore } from "src/ui/uiModule";
 import { IModalStore } from "../../domain/interfaces/IModalStore";
-import { useModalStore } from "../store/modalStore";
 import ModalHeader from "./ModalHeader";
 
 enum Opacity {
@@ -8,8 +9,12 @@ enum Opacity {
   Opacity80 = "opacity-80",
 }
 
-export default function Modal() {
-  const { modal, clearModal }: IModalStore = useModalStore();
+interface Props {
+  useModalStore(): IModalStore;
+}
+
+function Modal({ useModalStore }: Props) {
+  const { modal, clearModal } = useModalStore();
   const [opacity, setOpacity] = useState(Opacity.Opacity0);
 
   useEffect(() => {
@@ -44,3 +49,5 @@ export default function Modal() {
     </section>
   );
 }
+
+export default withDeps(Modal)({ useModalStore });
