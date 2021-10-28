@@ -3,6 +3,7 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: "daily",
   exclude: ["/sorry", "/ca/sorry", "/es/sorry"],
+  /*
   robotsTxtOptions: {
     policies: [
       {
@@ -12,4 +13,5 @@ module.exports = {
       },
     ],
   },
+  */
 };
