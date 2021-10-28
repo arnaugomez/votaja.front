@@ -9,6 +9,7 @@ interface Props extends CCnProps {
   variant?: "primary" | "subtle";
   isSubmit?: boolean;
   isLoading?: boolean;
+  ariaLabel?: string;
 }
 
 type ColorMap = Record<Props["color"], string>;
@@ -45,6 +46,7 @@ export default function Button({
   isSubmit,
   isLoading = false,
   children,
+  ariaLabel,
   ...props
 }: Props) {
   const fwClass = fullWidth ? "block w-full grid place-items-center " : "";
@@ -58,6 +60,7 @@ export default function Button({
         className
       }
       type={isSubmit ? "submit" : "button"}
+      aria-label={ariaLabel}
       {...props}
     >
       {isLoading ? (

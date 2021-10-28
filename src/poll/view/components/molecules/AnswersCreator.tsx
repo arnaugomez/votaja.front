@@ -52,7 +52,7 @@ export default function AnswersCreator({
   }
 
   return (
-    <label className="block pb-4">
+    <article className="block pb-4">
       {label && <p className="text-sm pb-2 font-medium">{label}</p>}
 
       <ul ref={ulRef}>
@@ -65,6 +65,7 @@ export default function AnswersCreator({
             />
             <div className="pb-2 flex-none flex items-center">
               <button
+                aria-label="Delete answer"
                 type="button"
                 className={
                   "h-6 w-8 fix-svg " +
@@ -81,11 +82,17 @@ export default function AnswersCreator({
         ))}
       </ul>
 
-      <Button fullWidth variant="subtle" color="success" onClick={addValue}>
+      <Button
+        ariaLabel="Add answer"
+        fullWidth
+        variant="subtle"
+        color="success"
+        onClick={addValue}
+      >
         <AddIcon />
       </Button>
 
       {error && <p className="text-xs pt-2 text-red-700">{error}</p>}
-    </label>
+    </article>
   );
 }

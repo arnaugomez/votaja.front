@@ -202,6 +202,7 @@ export default function CreatePoll({ poll, onCreate }: Props) {
                 <div className="pt-8 flex justify-between">
                   {!showExtraOptions ? (
                     <Button
+                      ariaLabel="Extra options"
                       className="w-20 flex justify-center items-center"
                       variant="subtle"
                       color="boring"
