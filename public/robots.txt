@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /sorry
+Disallow: /ca/sorry
+Disallow: /es/sorry
+
+# Host
+Host: https://www.votaja.com
+
+# Sitemaps
+Sitemap: https://www.votaja.com/sitemap.xml
