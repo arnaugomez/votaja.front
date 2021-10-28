@@ -52,7 +52,7 @@ export default function AnswersCreator({
   }
 
   return (
-    <article className="block pb-4">
+    <label className="block pb-4">
       {label && <p className="text-sm pb-2 font-medium">{label}</p>}
 
       <ul ref={ulRef}>
@@ -93,6 +93,6 @@ export default function AnswersCreator({
       </Button>
 
       {error && <p className="text-xs pt-2 text-red-700">{error}</p>}
-    </article>
+    </label>
   );
 }
